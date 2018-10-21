@@ -5,34 +5,61 @@ import org.junit.Test;
 public class ObservationTest
 {
 
+    /**
+     * A Observation object called tester to be used for testing
+     */
+    Observation tester = new Observation(15.34, "test");
+
+    /**
+     * A Observation object called tester2 to be used for testing
+     */
+    Observation tester2 = new Observation(-999, "test2");
+
+    /**
+     * Tests to see if an Observations data was correctly stored
+     */
     @Test
     public void testObservation()
     {
-        fail("Not yet implemented");
+        assertEquals(tester.getValue(), 15.34, 1);
+        assertEquals(tester.getStid(), "test");
     }
 
+    /**
+     * Tests to see if a value was correctly stored
+     */
     @Test
     public void testGetValue()
     {
-        fail("Not yet implemented");
+        assertEquals(tester.getValue(), 15.34, 1);
     }
 
+    /**
+     * Tests to see if a value is valid
+     */
     @Test
     public void testIsValid()
     {
-        fail("Not yet implemented");
+        assertEquals(tester.isValid(), true);
+        assertEquals(tester2.isValid(), false);
     }
 
+    /**
+     * Tests to see if an Observation's station ID is correct
+     */
     @Test
     public void testGetStid()
     {
-        fail("Not yet implemented");
+        assertEquals(tester.getStid(), "test");
     }
 
+    /**
+     * Tests to see if the Observation method toString outputs the correct String
+     */
     @Test
     public void testToString()
     {
-        fail("Not yet implemented");
+        assertEquals(tester.toString(), "15.34 test");
     }
 
 }
