@@ -1,5 +1,5 @@
 
-public class Observation
+public class Observation extends AbstractObservation
 {
     /**
      * A double containing the value of an observation

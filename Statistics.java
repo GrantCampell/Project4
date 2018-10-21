@@ -1,7 +1,7 @@
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Statistics
+public class Statistics extends Observation
 {
     /**
      * A immutable String that contains the format of a date time String
