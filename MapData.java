@@ -7,12 +7,15 @@ import java.util.Calendar;
 import java.util.EnumMap;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class MapData
 {
     private HashMap dataCatalog = new HashMap<String, ArrayList<Observation>>();
     
     private EnumMap statistics = new EnumMap<StatsType, TreeMap<String, Statistics>>();
+    
+    private TreeMap paramPositions = new TreeMap<String, Integer>();
     
     /**
      * An arraylist of observations for solar radiation
@@ -60,84 +63,9 @@ public class MapData
     private static final String STID = "STID";
 
     /**
-     * An int that stores the position of the station id
-     */
-    private int stidPosition = -1;
-
-    /**
-     * An int that stores the position of the air temperature data
-     */
-    private int tairPosition = -1;
-
-    /**
-     * An int that stores the position of the air temperature at 9 meters data
-     */
-    private int ta9mPosition = -1;
-
-    /**
-     * An int that stores the position of the solar radiation data
-     */
-    private int sradPosition = -1;
-
-    /**
      * A string containing the station ID "Mesonet"
      */
     private static final String MESONET = "Mesonet";
-
-    /**
-     * A String that contains the folder the data is located in
-     */
-    private String directory;
-
-    /**
-     * A Statistics object that stores the minimum tair value, and its information
-     */
-    private Statistics tairMin;
-
-    /**
-     * A Statistics object that stores the miaximum tair value, and its information
-     */
-    private Statistics tairMax;
-
-    /**
-     * A Statistics object that stores the average tair value, and its information
-     */
-    private Statistics tairAverage;
-
-    /**
-     * A Statistics object that stores the minimum ta9m value, and its information
-     */
-    private Statistics ta9mMin;
-
-    /**
-     * A Statistics object that stores the maximum ta9m value, and its information
-     */
-    private Statistics ta9mMax;
-
-    /**
-     * A Statistics object that stores the average ta9m value, and its information
-     */
-    private Statistics ta9mAverage;
-
-    /**
-     * A Statistics object that stores the minimum srad value, and its information
-     */
-    private Statistics sradMin;
-
-    /**
-     * A Statistics object that stores the maximum srad value, and its information
-     */
-    private Statistics sradMax;
-
-    /**
-     * A statistics object that stores the average srad value, and its information
-     */
-    private Statistics sradAverage;
-
-    /**
-     * A statistics object that stores the total srad value, and its information
-     */
-    private Statistics sradTotal;
 
     /**
      * A String object that stores the fileName as created by the createFileName
