@@ -18,21 +18,6 @@ public class MapData
     private TreeMap paramPositions = new TreeMap<String, Integer>();
     
     /**
-     * An arraylist of observations for solar radiation
-     */
-    private ArrayList<Observation> sradData = new ArrayList<Observation>();
-
-    /**
-     * An arraylist of observations for air temperature at 1.5 meters
-     */
-    private ArrayList<Observation> tairData = new ArrayList<Observation>();
-
-    /**
-     * An arraylist of observations for air temperature at 9 meters
-     */
-    private ArrayList<Observation> ta9mData = new ArrayList<Observation>();
-
-    /**
      * An int value of 10, that is the number of missing observations
      */
     private static final int NUMBER_OF_MISSING_OBSERVATIONS = 10;
