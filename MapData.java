@@ -311,6 +311,16 @@ public class MapData
     }
     
     //TODO: Add new methods
+    
+    private void prepareDataCatalog()
+    {
+        //TODO: Complete this method
+    }
+    
+    private void calculateStatistics()
+    {
+        //TODO: Complete this method
+    }
 
     /**
      * Creates and returns a String that is the final output for the program. The
