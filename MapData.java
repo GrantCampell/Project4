@@ -118,13 +118,7 @@ public class MapData
      */
     public MapData(int year, int month, int day, int hour, int minute, String directory)
     {
-        this.directory = directory;
-
-        // Creates a GregorianCalendar to hold the date and time data
-        utcDateTime = new GregorianCalendar(year, month, day, hour, minute);
-
-        // Creates fileName for the data
-        fileName = createFileName();
+        //TODO: Rewrite
     }
 
     /**
@@ -132,8 +126,9 @@ public class MapData
      * 
      * @return currentFileName The fileName of the requested data
      */
-    public String createFileName()
+    public String createFileName(int year, int month, int day, int hour, int minute, String directory)
     {
+        //TODO: Make NEcessary Adjustments
         // Creates an empty String to hold the new fileName
         String currentFileName = "";
 
@@ -198,6 +193,8 @@ public class MapData
      */
     private void parseParamHeader(String inParamString) throws IOException
     {
+        //TODO: REWRITE
+        //ALSO MAKE THE inParamString the requested ID
         BufferedReader br = new BufferedReader(new FileReader(directory + "/" + fileName));
 
         // String containing a line of data from the file
@@ -308,175 +305,12 @@ public class MapData
      * @param paramId
      *            The parameter type having statistics calculated
      */
-    private void calculateStatistics(ArrayList<Observation> inData, String paramId)
+    private void calculateAllStatistics(ArrayList<Observation> inData, String paramId)
     {
-        // Sorts through the data and finds all of the valid observations
-        ArrayList<Observation> validList = new ArrayList<Observation>();
-        for (int i = 0; i < numberOfStations; ++i)
-        {
-            if (inData.get(i).isValid())
-            {
-                // The valid data is stored in a new ArrayList
-                validList.add(inData.get(i));
-            }
-        }
-
-        // Min
-        Statistics statMin = new Statistics(validList.get(0).getValue(), validList.get(0).getStid(), utcDateTime,
-                validList.size(), min);
-
-        // Checks to see if there is any other valid Observation that is smaller than
-        // statMin
-        for (int i = 0; i < validList.size(); ++i)
-        {
-            if (validList.get(i).getValue() <= statMin.getValue())
-            {
-                statMin = new Statistics(validList.get(i).getValue(), validList.get(i).getStid(), utcDateTime,
-                        validList.size(), min);
-            }
-        }
-
-        // Max
-        Statistics statMax = new Statistics(validList.get(0).getValue(), validList.get(0).getStid(), utcDateTime,
-                validList.size(), max);
-
-        // Checks to see if there is any other valid Observation that is larger than
-        // statMax
-        for (int i = 0; i < validList.size(); ++i)
-        {
-            if (validList.get(i).getValue() >= statMax.getValue())
-            {
-                statMax = new Statistics(validList.get(i).getValue(), validList.get(i).getStid(), utcDateTime,
-                        validList.size(), max);
-            }
-        }
-
-        // Average
-        double sum = 0;
-
-        for (int i = 0; i < validList.size(); ++i)
-        {
-            sum += validList.get(i).getValue();
-        }
-
-        // Creates a preliminary average value
-        double averageValue = sum / validList.size();
-        // Multiplies it by 10
-        averageValue = averageValue * 10;
-        // Rounds it to the nearest whole number
-        averageValue = Math.round(averageValue);
-        // Divides it by 10 to get our decimal place back
-        averageValue = averageValue / 10;
-
-        Statistics statAverage = new Statistics(averageValue, MESONET, utcDateTime, validList.size(), avg);
-
-        // Assignment
-        // Assigns the statistics to the correct parameter
-        {
-            if (paramId.equals(TAIR))
-            {
-                tairMin = statMin;
-                tairMax = statMax;
-                tairAverage = statAverage;
-                tairValid = validList;
-            }
-            else if (paramId.equals(TA9M))
-            {
-                ta9mMin = statMin;
-                ta9mMax = statMax;
-                ta9mAverage = statAverage;
-                ta9mValid = validList;
-            }
-            else if (paramId.equals(SRAD))
-            {
-                sradMin = statMin;
-                sradMax = statMax;
-                sradAverage = statAverage;
-                sradTotal = new Statistics(sum, MESONET, utcDateTime, validList.size(), tot);
-                sradValid = validList;
-            }
-        }
+       //TODO: Rewrite
     }
-
-    /**
-     * @return the tairMin
-     */
-    public Observation getTairMin()
-    {
-        return tairMin;
-    }
-
-    /**
-     * @return the tairMax
-     */
-    public Observation getTairMax()
-    {
-        return tairMax;
-    }
-
-    /**
-     * @return the tairAverage
-     */
-    public Observation getTairAverage()
-    {
-        return tairAverage;
-    }
-
-    /**
-     * @return the ta9mMin
-     */
-    public Observation getTa9mMin()
-    {
-        return ta9mMin;
-    }
-
-    /**
-     * @return the ta9mMax
-     */
-    public Observation getTa9mMax()
-    {
-        return ta9mMax;
-    }
-
-    /**
-     * @return the ta9mAverage
-     */
-    public Observation getTa9mAverage()
-    {
-        return ta9mAverage;
-    }
-
-    /**
-     * @return the sradMin
-     */
-    public Observation getSradMin()
-    {
-        return sradMin;
-    }
-
-    /**
-     * @return the sradMax
-     */
-    public Observation getSradMax()
-    {
-        return sradMax;
-    }
-
-    /**
-     * @return the sradAverage
-     */
-    public Observation getSradAverage()
-    {
-        return sradAverage;
-    }
-
-    /**
-     * @return the sradTotal
-     */
-    public Observation getSradTotal()
-    {
-        return sradTotal;
-    }
+    
+    //TODO: Add new methods
 
     /**
      * Creates and returns a String that is the final output for the program. The
