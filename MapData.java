@@ -4,10 +4,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.EnumMap;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 public class MapData
 {
+    private HashMap dataCatalog = new HashMap<String, ArrayList<Observation>>();
+    
+    private EnumMap statistics = new EnumMap<StatsType, TreeMap<String, Statistics>>();
+    
     /**
      * An arraylist of observations for solar radiation
      */
