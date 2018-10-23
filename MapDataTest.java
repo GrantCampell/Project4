@@ -21,7 +21,7 @@ public class MapDataTest
     @Test
     public void testCreateFileName()
     {
-        String test = "201808010700.mdf";
+        String test = "data/201808010700.mdf";
         Assert.assertEquals(tester.createFileName(), test);
     }
 
