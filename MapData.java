@@ -12,11 +12,11 @@ import java.util.TreeMap;
 public class MapData
 {
     private HashMap dataCatalog = new HashMap<String, ArrayList<Observation>>();
-    
+
     private EnumMap statistics = new EnumMap<StatsType, TreeMap<String, Statistics>>();
-    
+
     private TreeMap paramPositions = new TreeMap<String, Integer>();
-    
+
     /**
      * An int value of 10, that is the number of missing observations
      */
@@ -65,41 +65,6 @@ public class MapData
     private GregorianCalendar utcDateTime;
 
     /**
-     * A reference variable for the MINIMUM enum value
-     */
-    StatsType min = StatsType.MINIMUM;
-
-    /**
-     * A reference variable for the MAXIMUM enum value
-     */
-    StatsType max = StatsType.MAXIMUM;
-
-    /**
-     * A reference variable for the AVERAGE enum value
-     */
-    StatsType avg = StatsType.AVERAGE;
-
-    /**
-     * A reference variable for the TOTAL enum value
-     */
-    StatsType tot = StatsType.TOTAL;
-
-    /**
-     * A new ArrayList that stores the valid tair data
-     */
-    ArrayList<Observation> tairValid = new ArrayList<Observation>();
-
-    /**
-     * A new ArrayList that stores the valid ta9m data
-     */
-    ArrayList<Observation> ta9mValid = new ArrayList<Observation>();
-
-    /**
-     * A new ArrayList that stores the valid srad data
-     */
-    ArrayList<Observation> sradValid = new ArrayList<Observation>();
-
-    /**
      * The constuctor for the MapData class. Takes in information about the file
      * requested, and pushes the data through the rest of the program
      * 
@@ -118,7 +83,9 @@ public class MapData
      */
     public MapData(int year, int month, int day, int hour, int minute, String directory)
     {
-        //TODO: Rewrite
+        // TODO: Rewrite
+        utcDateTime = new GregorianCalendar(year, month, day, hour, minute);
+        fileName = createFileName(year, month, day, hour, minute, directory);
     }
 
     /**
@@ -128,7 +95,6 @@ public class MapData
      */
     public String createFileName(int year, int month, int day, int hour, int minute, String directory)
     {
-        //TODO: Make NEcessary Adjustments
         // Creates an empty String to hold the new fileName
         String currentFileName = "";
 
@@ -178,7 +144,7 @@ public class MapData
         }
 
         // Appends the pieces of the fileName together with the .mdf suffix
-        currentFileName = fileYear + fileMonth + fileDay + fileHour + fileMinute + ".mdf";
+        currentFileName = directory + "/" + fileYear + fileMonth + fileDay + fileHour + fileMinute + ".mdf";
 
         return currentFileName;
     }
@@ -193,9 +159,8 @@ public class MapData
      */
     private void parseParamHeader(String inParamString) throws IOException
     {
-        //TODO: REWRITE
-        //ALSO MAKE THE inParamString the requested ID
-        BufferedReader br = new BufferedReader(new FileReader(directory + "/" + fileName));
+        // TODO: Test this
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
 
         // String containing a line of data from the file
         String strg;
@@ -220,23 +185,10 @@ public class MapData
         // assigned a value that is not -1
         for (int i = 0; i < header.size(); ++i)
         {
-            if (header.get(i).equalsIgnoreCase(STID))
+            if (header.get(i).equalsIgnoreCase(inParamString))
             {
-                stidPosition = i;
+                paramPositions.put(inParamString, i);
             }
-            else if (header.get(i).equalsIgnoreCase(TAIR))
-            {
-                tairPosition = i;
-            }
-            else if (header.get(i).equalsIgnoreCase(SRAD))
-            {
-                sradPosition = i;
-            }
-            else if (header.get(i).equalsIgnoreCase(TA9M))
-            {
-                ta9mPosition = i;
-            }
-
         }
 
     }
@@ -252,8 +204,13 @@ public class MapData
      */
     public void parseFile() throws IOException
     {
-        parseParamHeader("go to parse header");
-        BufferedReader br = new BufferedReader(new FileReader(directory + "/" + fileName));
+        // TODO: Fix method
+        parseParamHeader(TA9M);
+        parseParamHeader(SRAD);
+        parseParamHeader(TAIR);
+        parseParamHeader(STID);
+
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
 
         // String containing a line of data from the file
         String strg;
@@ -274,25 +231,36 @@ public class MapData
 
         // Runs through the input file and reads each line into a player object
         // Counter will indicate the size the new array needs to be
+        // Creates temp arrays to be stored in dataCatalog
+        ArrayList<Observation> sradData = new ArrayList<Observation>();
+        ArrayList<Observation> tairData = new ArrayList<Observation>();
+        ArrayList<Observation> ta9mData = new ArrayList<Observation>();
         numberOfStations = 0;
         while ((temp = br.readLine()) != null)
         {
             String[] tempString = new String[24];
             tempString = temp.split("\\s+");
 
-            sradData.add(new Observation(Double.parseDouble(tempString[sradPosition]), tempString[stidPosition]));
-            tairData.add(new Observation(Double.parseDouble(tempString[tairPosition]), tempString[stidPosition]));
-            ta9mData.add(new Observation(Double.parseDouble(tempString[ta9mPosition]), tempString[stidPosition]));
+            sradData.add(new Observation(Double.parseDouble(tempString[(int) paramPositions.get(SRAD)]),
+                    tempString[(int) paramPositions.get(STID)]));
+            tairData.add(new Observation(Double.parseDouble(tempString[(int) paramPositions.get(TAIR)]),
+                    tempString[(int) paramPositions.get(STID)]));
+            ta9mData.add(new Observation(Double.parseDouble(tempString[(int) paramPositions.get(TA9M)]),
+                    tempString[(int) paramPositions.get(STID)]));
 
             ++numberOfStations;
         }
 
+        // TODO: THESE TEMP ARRAYS NEED TO BE STORED IN DATA CATALOG
+
+        dataCatalog.put(TAIR, tairData);
+        dataCatalog.put(TA9M, ta9mData);
+        dataCatalog.put(SRAD, sradData);
+
         br.close();
 
         // Calculates all statistics for the data
-        calculateStatistics(sradData, SRAD);
-        calculateStatistics(tairData, TAIR);
-        calculateStatistics(ta9mData, TA9M);
+        calculateAllStatistics();
     }
 
     /**
@@ -307,19 +275,19 @@ public class MapData
      */
     private void calculateAllStatistics(ArrayList<Observation> inData, String paramId)
     {
-       //TODO: Rewrite
+        // TODO: Rewrite
     }
-    
-    //TODO: Add new methods
-    
+
+    // TODO: Add new methods
+
     private void prepareDataCatalog()
     {
-        //TODO: Complete this method
+        // TODO: Complete this method
     }
-    
+
     private void calculateStatistics()
     {
-        //TODO: Complete this method
+        // TODO: Complete this method
     }
 
     /**
@@ -331,7 +299,7 @@ public class MapData
      */
     public String toString()
     {
-        //TODO: Adjust
+        // TODO: Adjust
         String fileYear = String.valueOf(utcDateTime.get(Calendar.YEAR));
 
         // If any value is a one-digit number, a 0 is put in front of it
