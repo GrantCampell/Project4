@@ -13,7 +13,8 @@ public class MapData
 {
     private HashMap dataCatalog = new HashMap<String, ArrayList<Observation>>();
 
-    private EnumMap statistics = new EnumMap<StatsType, TreeMap<String, Statistics>>();
+    //TODO: THIS IS HOW WERE STrOING THE AVG< MAX< MIN. IT IS A STATISTIC WHICH WILL BE PUT IN THIS MAP
+    private EnumMap statistics = new EnumMap<StatsType, TreeMap<String, Statistics>()>;
 
     private TreeMap paramPositions = new TreeMap<String, Integer>();
 
@@ -188,6 +189,7 @@ public class MapData
             if (header.get(i).equalsIgnoreCase(inParamString))
             {
                 paramPositions.put(inParamString, i);
+                break;
             }
         }
 
@@ -252,10 +254,10 @@ public class MapData
         }
 
         // TODO: THESE TEMP ARRAYS NEED TO BE STORED IN DATA CATALOG
-
-        dataCatalog.put(TAIR, tairData);
-        dataCatalog.put(TA9M, ta9mData);
-        dataCatalog.put(SRAD, sradData);
+        // TODO: This is temporary. I need a way to implement prepareDataCatalog
+        dataCatalog.put(TAIR, (ArrayList<Observation>) tairData);
+        dataCatalog.put(TA9M, (ArrayList<Observation>) ta9mData);
+        dataCatalog.put(SRAD, (ArrayList<Observation>) sradData);
 
         br.close();
 
