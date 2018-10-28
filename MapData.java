@@ -288,6 +288,9 @@ public class MapData
     private void calculateStatistics()
     {
         // TODO: Complete this method
+        calculateAllStatistics((ArrayList<Observation>) dataCatalog.get(TAIR), TAIR);
+        calculateAllStatistics((ArrayList<Observation>) dataCatalog.get(TA9M), TA9M);
+        calculateAllStatistics((ArrayList<Observation>) dataCatalog.get(SRAD), SRAD);
     }
 
     /**
