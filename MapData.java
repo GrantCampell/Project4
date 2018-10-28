@@ -15,7 +15,8 @@ public class MapData
 
     // TODO: THIS IS HOW WERE STrOING THE AVG< MAX< MIN. IT IS A STATISTIC WHICH
     // WILL BE PUT IN THIS MAP
-    private EnumMap statistics = new EnumMap<StatsType, TreeMap<String, Statistics>>(StatsType.class);
+    private EnumMap<StatsType, TreeMap<String, Statistics>> statistics = new EnumMap<StatsType, TreeMap<String, Statistics>>(
+            StatsType.class);
 
     private TreeMap paramPositions = new TreeMap<String, Integer>();
 
@@ -337,9 +338,14 @@ public class MapData
         // Divides it by 10 to get our decimal place back
         averageValue = averageValue / 10;
 
-        Statistics statAverage = new Statistics(averageValue, MESONET, utcDateTime, validList.size(), StatsType.AVERAGE);
-        
-        statistics.put(StatsType.MINIMUM, new TreeMap("", statMin));
+        Statistics statAverage = new Statistics(averageValue, MESONET, utcDateTime, validList.size(),
+                StatsType.AVERAGE);
+
+        TreeMap temp = new TreeMap<String, Statistics>();
+
+        statistics.put(StatsType.MINIMUM, (TreeMap<String, Statistics>) temp.put(paramId, statMin));
+        statistics.put(StatsType.MAXIMUM, (TreeMap<String, Statistics>) temp.put(paramId, statMax));
+        statistics.put(StatsType.AVERAGE, (TreeMap<String, Statistics>) temp.put(paramId, statAverage));
     }
 
     private void prepareDataCatalog()
