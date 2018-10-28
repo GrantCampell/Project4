@@ -13,7 +13,8 @@ public class MapData
 {
     private HashMap dataCatalog = new HashMap<String, ArrayList<Observation>>();
 
-    //TODO: THIS IS HOW WERE STrOING THE AVG< MAX< MIN. IT IS A STATISTIC WHICH WILL BE PUT IN THIS MAP
+    // TODO: THIS IS HOW WERE STrOING THE AVG< MAX< MIN. IT IS A STATISTIC WHICH
+    // WILL BE PUT IN THIS MAP
     private EnumMap statistics = new EnumMap<StatsType, TreeMap<String, Statistics>()>;
 
     private TreeMap paramPositions = new TreeMap<String, Integer>();
@@ -278,7 +279,7 @@ public class MapData
     private void calculateAllStatistics(ArrayList<Observation> inData, String paramId)
     {
         // TODO: Rewrite
-     // Sorts through the data and finds all of the valid observations
+        // Sorts through the data and finds all of the valid observations
         ArrayList<Observation> validList = new ArrayList<Observation>();
         for (int i = 0; i < numberOfStations; ++i)
         {
@@ -291,7 +292,7 @@ public class MapData
 
         // Min
         Statistics statMin = new Statistics(validList.get(0).getValue(), validList.get(0).getStid(), utcDateTime,
-                validList.size(), min);
+                validList.size(), StatsType.MINIMUM);
 
         // Checks to see if there is any other valid Observation that is smaller than
         // statMin
@@ -300,13 +301,13 @@ public class MapData
             if (validList.get(i).getValue() <= statMin.getValue())
             {
                 statMin = new Statistics(validList.get(i).getValue(), validList.get(i).getStid(), utcDateTime,
-                        validList.size(), min);
+                        validList.size(), StatsType.MINIMUM);
             }
         }
 
         // Max
         Statistics statMax = new Statistics(validList.get(0).getValue(), validList.get(0).getStid(), utcDateTime,
-                validList.size(), max);
+                validList.size(), StatsType.MAXIMUM);
 
         // Checks to see if there is any other valid Observation that is larger than
         // statMax
@@ -315,7 +316,7 @@ public class MapData
             if (validList.get(i).getValue() >= statMax.getValue())
             {
                 statMax = new Statistics(validList.get(i).getValue(), validList.get(i).getStid(), utcDateTime,
-                        validList.size(), max);
+                        validList.size(), StatsType.MAXIMUM);
             }
         }
 
@@ -336,10 +337,8 @@ public class MapData
         // Divides it by 10 to get our decimal place back
         averageValue = averageValue / 10;
 
-        Statistics statAverage = new Statistics(averageValue, MESONET, utcDateTime, validList.size(), avg);
+        Statistics statAverage = new Statistics(averageValue, MESONET, utcDateTime, validList.size(), StatsType.AVERAGE);
     }
-
-    // TODO: Add new methods
 
     private void prepareDataCatalog()
     {
