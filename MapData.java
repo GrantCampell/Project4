@@ -260,7 +260,7 @@ public class MapData
         br.close();
 
         // Calculates all statistics for the data
-        calculateAllStatistics();
+        calculateStatistics();
     }
 
     /**
