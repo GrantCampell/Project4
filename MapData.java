@@ -430,18 +430,18 @@ public class MapData
         output += "\n";
 
         // Determines if there is too much missing data to print tair statistics
-        if ((numberOfStations - tairValid.size()) > NUMBER_OF_MISSING_OBSERVATIONS)
+        if ((numberOfStations - XXX > NUMBER_OF_MISSING_OBSERVATIONS)
         {
             output += "Not enough valid air temperature data";
             output += "\n";
         }
         else
         {
-            output += "Maximum Air Temperature[1.5m] = " + tairMax.getValue() + " C at " + tairMax.getStid();
+            output += "Maximum Air Temperature[1.5m] = " + statistics.get(StatsType.MAXIMUM).get(TAIR).getValue() + " C at " + statistics.get(StatsType.MAXIMUM).get(TAIR).getStid();
             output += "\n";
-            output += "Minimum Air Temperature[1.5m] = " + tairMin.getValue() + " C at " + tairMin.getStid();
+            output += "Minimum Air Temperature[1.5m] = " + statistics.get(StatsType.MINIMUM).get(TAIR).getValue() + " C at " + statistics.get(StatsType.MINIMUM).get(TAIR).getStid();
             output += "\n";
-            output += "Average Air Temperature[1.5m] = " + tairAverage.getValue() + " C at " + tairAverage.getStid();
+            output += "Average Air Temperature[1.5m] = " + statistics.get(StatsType.AVERAGE).get(TAIR).getValue() + " C at " + statistics.get(StatsType.AVERAGE).get(TAIR).getStid();
             output += "\n";
         }
         for (int i = 0; i < 58; ++i)
@@ -463,11 +463,11 @@ public class MapData
         else
         {
             output += "\n";
-            output += "Maximum Air Temperature[9.0m] = " + ta9mMax.getValue() + " C at " + ta9mMax.getStid();
+            output += "Maximum Air Temperature[9.0m] = " + statistics.get(StatsType.MAXIMUM).get(TA9M).getValue() + " C at " + statistics.get(StatsType.MAXIMUM).get(TA9M).getStid();
             output += "\n";
-            output += "Minimum Air Temperature[9.0m] = " + ta9mMin.getValue() + " C at " + ta9mMin.getStid();
+            output += "Minimum Air Temperature[9.0m] = " + statistics.get(StatsType.MINIMUM).get(TA9M).getValue() + " C at " + statistics.get(StatsType.MINIMUM).get(TA9M).getStid();
             output += "\n";
-            output += "Average Air Temperature[9.0m] = " + ta9mAverage.getValue() + " C at " + ta9mAverage.getStid();
+            output += "Average Air Temperature[9.0m] = " + statistics.get(StatsType.AVERAGE).get(TA9M).getValue() + " C at " + statistics.get(StatsType.AVERAGE).get(TA9M).getStid();
             output += "\n";
         }
         for (int i = 0; i < 58; ++i)
@@ -489,12 +489,11 @@ public class MapData
         else
         {
             output += "\n";
-            output += "Maximum Solar Radiation[1.5m] = " + sradMax.getValue() + " W/m^2 at " + sradMax.getStid();
+            output += "Maximum Solar Radiation[1.5m] = " + statistics.get(StatsType.MAXIMUM).get(SRAD).getValue() + " C at " + statistics.get(StatsType.MAXIMUM).get(SRAD).getStid();
             output += "\n";
-            output += "Minimum Solar Radiation[1.5m] = " + sradMin.getValue() + " W/m^2 at " + sradMin.getStid();
+            output += "Minimum Solar Radiation[1.5m] = " + statistics.get(StatsType.MINIMUM).get(SRAD).getValue() + " C at " + statistics.get(StatsType.MINIMUM).get(SRAD).getStid();
             output += "\n";
-            output += "Average Solar Radiation[1.5m] = " + sradAverage.getValue() + " W/m^2 at "
-                    + sradAverage.getStid();
+            output += "Average Solar Radiation[1.5m] = " + statistics.get(StatsType.AVERAGE).get(SRAD).getValue() + " C at " + statistics.get(StatsType.AVERAGE).get(SRAD).getStid();
             output += "\n";
         }
         for (int i = 0; i < 58; ++i)
