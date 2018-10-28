@@ -278,6 +278,65 @@ public class MapData
     private void calculateAllStatistics(ArrayList<Observation> inData, String paramId)
     {
         // TODO: Rewrite
+     // Sorts through the data and finds all of the valid observations
+        ArrayList<Observation> validList = new ArrayList<Observation>();
+        for (int i = 0; i < numberOfStations; ++i)
+        {
+            if (inData.get(i).isValid())
+            {
+                // The valid data is stored in a new ArrayList
+                validList.add(inData.get(i));
+            }
+        }
+
+        // Min
+        Statistics statMin = new Statistics(validList.get(0).getValue(), validList.get(0).getStid(), utcDateTime,
+                validList.size(), min);
+
+        // Checks to see if there is any other valid Observation that is smaller than
+        // statMin
+        for (int i = 0; i < validList.size(); ++i)
+        {
+            if (validList.get(i).getValue() <= statMin.getValue())
+            {
+                statMin = new Statistics(validList.get(i).getValue(), validList.get(i).getStid(), utcDateTime,
+                        validList.size(), min);
+            }
+        }
+
+        // Max
+        Statistics statMax = new Statistics(validList.get(0).getValue(), validList.get(0).getStid(), utcDateTime,
+                validList.size(), max);
+
+        // Checks to see if there is any other valid Observation that is larger than
+        // statMax
+        for (int i = 0; i < validList.size(); ++i)
+        {
+            if (validList.get(i).getValue() >= statMax.getValue())
+            {
+                statMax = new Statistics(validList.get(i).getValue(), validList.get(i).getStid(), utcDateTime,
+                        validList.size(), max);
+            }
+        }
+
+        // Average
+        double sum = 0;
+
+        for (int i = 0; i < validList.size(); ++i)
+        {
+            sum += validList.get(i).getValue();
+        }
+
+        // Creates a preliminary average value
+        double averageValue = sum / validList.size();
+        // Multiplies it by 10
+        averageValue = averageValue * 10;
+        // Rounds it to the nearest whole number
+        averageValue = Math.round(averageValue);
+        // Divides it by 10 to get our decimal place back
+        averageValue = averageValue / 10;
+
+        Statistics statAverage = new Statistics(averageValue, MESONET, utcDateTime, validList.size(), avg);
     }
 
     // TODO: Add new methods
