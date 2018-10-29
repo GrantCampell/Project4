@@ -8,25 +8,27 @@ import org.junit.Test;
 public class MapDataTest
 {
 
-    //TODO: Add new tests for new classes
-    
+    // TODO: Add new tests for new classes
+
     /**
-     * A MapData object called tested that is used in testing
+     * A MapData object called tester that is used in testing
      */
     MapData tester = new MapData(2018, 8, 1, 7, 00, "data");
 
     /**
-     * Tests the createFileName method();
+     * A MapData object to be used in testing. Contains more than 10 missing data
+     * points in every category.
      */
-    @Test
-    public void testCreateFileName()
-    {
-        String test = "data/201808010700.mdf";
-        Assert.assertEquals(tester.createFileName(), test);
-    }
+    MapData tester2 = new MapData(2018, 8, 30, 17, 45, "data");
+    
+    /**
+     * A MapData object to be used in testing. Has a two digit month.
+     */
+    MapData tester3 = new MapData(2018, 10, 30, 17, 45, "data");
 
     /**
-     * Tests the toString method
+     * Tests the toString method. If the toString method completes successfully,
+     * then every piece of code worked.
      * 
      * @throws IOException
      *             Throws an exceptions if the input to parseFile() is invalid
@@ -52,5 +54,20 @@ public class MapDataTest
                         + "Minimum Solar Radiation[1.5m] = 0.0 W/m^2 at YUKO\n"
                         + "Average Solar Radiation[1.5m] = 0.0 W/m^2 at Mesonet\n"
                         + "==========================================================");
+
+        tester2.parseFile();
+        assertEquals(tester2.toString(),
+                "==========================================================\n" + "=== 2018-08-30 17:45 ===\n"
+                        + "==========================================================\n"
+                        + "Not enough valid air temperature data\n"
+                        + "==========================================================\n"
+                        + "==========================================================\n"
+                        + "Not enough valid air temperature at 9 meters data\n"
+                        + "==========================================================\n"
+                        + "==========================================================\n"
+                        + "Not enough valid solar radiation data\n"
+                        + "==========================================================");
+        
+        tester3.createFileName(2018, 10, 30, 17, 45, "data");
     }
 }
