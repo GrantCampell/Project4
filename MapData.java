@@ -11,14 +11,13 @@ import java.util.TreeMap;
 
 public class MapData
 {
-    private HashMap dataCatalog = new HashMap<String, ArrayList<Observation>>();
+    private HashMap<String, ArrayList<Observation>> dataCatalog = new HashMap<>();
 
     // TODO: THIS IS HOW WERE STrOING THE AVG< MAX< MIN. IT IS A STATISTIC WHICH
     // WILL BE PUT IN THIS MAP
-    private EnumMap<StatsType, TreeMap<String, Statistics>> statistics = new EnumMap<StatsType, TreeMap<String, Statistics>>(
-            StatsType.class);
+    private EnumMap<StatsType, TreeMap<String, Statistics>> statistics = new EnumMap<>(StatsType.class);
 
-    private TreeMap paramPositions = new TreeMap<String, Integer>();
+    private TreeMap<String, Integer> paramPositions = new TreeMap<>();
 
     /**
      * An int value of 10, that is the number of missing observations
@@ -245,21 +244,21 @@ public class MapData
             String[] tempString = new String[24];
             tempString = temp.split("\\s+");
 
-            sradData.add(new Observation(Double.parseDouble(tempString[(int) paramPositions.get(SRAD)]),
-                    tempString[(int) paramPositions.get(STID)]));
-            tairData.add(new Observation(Double.parseDouble(tempString[(int) paramPositions.get(TAIR)]),
-                    tempString[(int) paramPositions.get(STID)]));
-            ta9mData.add(new Observation(Double.parseDouble(tempString[(int) paramPositions.get(TA9M)]),
-                    tempString[(int) paramPositions.get(STID)]));
+            sradData.add(new Observation(Double.parseDouble(tempString[paramPositions.get(SRAD)]),
+                    tempString[paramPositions.get(STID)]));
+            tairData.add(new Observation(Double.parseDouble(tempString[paramPositions.get(TAIR)]),
+                    tempString[paramPositions.get(STID)]));
+            ta9mData.add(new Observation(Double.parseDouble(tempString[paramPositions.get(TA9M)]),
+                    tempString[paramPositions.get(STID)]));
 
             ++numberOfStations;
         }
 
         // TODO: THESE TEMP ARRAYS NEED TO BE STORED IN DATA CATALOG
         // TODO: This is temporary. I need a way to implement prepareDataCatalog
-        dataCatalog.put(TAIR, (ArrayList<Observation>) tairData);
-        dataCatalog.put(TA9M, (ArrayList<Observation>) ta9mData);
-        dataCatalog.put(SRAD, (ArrayList<Observation>) sradData);
+        dataCatalog.put(TAIR, tairData);
+        dataCatalog.put(TA9M, ta9mData);
+        dataCatalog.put(SRAD, sradData);
 
         br.close();
 
@@ -341,11 +340,16 @@ public class MapData
         Statistics statAverage = new Statistics(averageValue, MESONET, utcDateTime, validList.size(),
                 StatsType.AVERAGE);
 
-        TreeMap temp = new TreeMap<String, Statistics>();
+        TreeMap<String, Statistics> temp = new TreeMap<>();
 
-        statistics.put(StatsType.MINIMUM, (TreeMap<String, Statistics>) temp.put(paramId, statMin));
-        statistics.put(StatsType.MAXIMUM, (TreeMap<String, Statistics>) temp.put(paramId, statMax));
-        statistics.put(StatsType.AVERAGE, (TreeMap<String, Statistics>) temp.put(paramId, statAverage));
+        temp.put(paramId, statMin);
+        statistics.put(StatsType.MINIMUM, temp);
+
+        temp.put(paramId, statMax);
+        statistics.put(StatsType.MAXIMUM, temp);
+
+        temp.put(paramId, statAverage);
+        statistics.put(StatsType.AVERAGE, temp);
     }
 
     private void prepareDataCatalog()
@@ -430,18 +434,21 @@ public class MapData
         output += "\n";
 
         // Determines if there is too much missing data to print tair statistics
-        if ((numberOfStations - XXX > NUMBER_OF_MISSING_OBSERVATIONS)
+        // if ((numberOfStations - XXX > NUMBER_OF_MISSING_OBSERVATIONS)
+        // {
+        // output += "Not enough valid air temperature data";
+        // output += "\n";
+        // }
+        // else
         {
-            output += "Not enough valid air temperature data";
+            output += "Maximum Air Temperature[1.5m] = " + statistics.get(StatsType.MAXIMUM).get(TAIR).getValue()
+                    + " C at " + statistics.get(StatsType.MAXIMUM).get(TAIR).getStid();
             output += "\n";
-        }
-        else
-        {
-            output += "Maximum Air Temperature[1.5m] = " + statistics.get(StatsType.MAXIMUM).get(TAIR).getValue() + " C at " + statistics.get(StatsType.MAXIMUM).get(TAIR).getStid();
+            output += "Minimum Air Temperature[1.5m] = " + statistics.get(StatsType.MINIMUM).get(TAIR).getValue()
+                    + " C at " + statistics.get(StatsType.MINIMUM).get(TAIR).getStid();
             output += "\n";
-            output += "Minimum Air Temperature[1.5m] = " + statistics.get(StatsType.MINIMUM).get(TAIR).getValue() + " C at " + statistics.get(StatsType.MINIMUM).get(TAIR).getStid();
-            output += "\n";
-            output += "Average Air Temperature[1.5m] = " + statistics.get(StatsType.AVERAGE).get(TAIR).getValue() + " C at " + statistics.get(StatsType.AVERAGE).get(TAIR).getStid();
+            output += "Average Air Temperature[1.5m] = " + statistics.get(StatsType.AVERAGE).get(TAIR).getValue()
+                    + " C at " + statistics.get(StatsType.AVERAGE).get(TAIR).getStid();
             output += "\n";
         }
         for (int i = 0; i < 58; ++i)
@@ -455,19 +462,22 @@ public class MapData
         }
 
         // Determines if there is too much data missing to print ta9m statistics
-        if ((numberOfStations - ta9mValid.size()) > NUMBER_OF_MISSING_OBSERVATIONS)
+        // if ((numberOfStations - ta9mValid.size()) > NUMBER_OF_MISSING_OBSERVATIONS)
+        // {
+        // output += "Not enough valid air temperature at 9 meters data";
+        // output += "\n";
+        // }
+        // else
         {
-            output += "Not enough valid air temperature  at 9 meters data";
             output += "\n";
-        }
-        else
-        {
+            output += "Maximum Air Temperature[9.0m] = " + statistics.get(StatsType.MAXIMUM).get(TA9M).getValue()
+                    + " C at " + statistics.get(StatsType.MAXIMUM).get(TA9M).getStid();
             output += "\n";
-            output += "Maximum Air Temperature[9.0m] = " + statistics.get(StatsType.MAXIMUM).get(TA9M).getValue() + " C at " + statistics.get(StatsType.MAXIMUM).get(TA9M).getStid();
+            output += "Minimum Air Temperature[9.0m] = " + statistics.get(StatsType.MINIMUM).get(TA9M).getValue()
+                    + " C at " + statistics.get(StatsType.MINIMUM).get(TA9M).getStid();
             output += "\n";
-            output += "Minimum Air Temperature[9.0m] = " + statistics.get(StatsType.MINIMUM).get(TA9M).getValue() + " C at " + statistics.get(StatsType.MINIMUM).get(TA9M).getStid();
-            output += "\n";
-            output += "Average Air Temperature[9.0m] = " + statistics.get(StatsType.AVERAGE).get(TA9M).getValue() + " C at " + statistics.get(StatsType.AVERAGE).get(TA9M).getStid();
+            output += "Average Air Temperature[9.0m] = " + statistics.get(StatsType.AVERAGE).get(TA9M).getValue()
+                    + " C at " + statistics.get(StatsType.AVERAGE).get(TA9M).getStid();
             output += "\n";
         }
         for (int i = 0; i < 58; ++i)
@@ -480,20 +490,24 @@ public class MapData
             output += "=";
         }
 
+        // TODO: FIX THESE
         // Determines if there is too much missing data to print srad statistics
-        if ((numberOfStations - sradValid.size()) > NUMBER_OF_MISSING_OBSERVATIONS)
+        // if ((numberOfStations - sradValid.size()) > NUMBER_OF_MISSING_OBSERVATIONS)
+        // {
+        // output += "Not enough valid solar radiation data";
+        // output += "\n";
+        // }
+        // else
         {
-            output += "Not enough valid solar radiation data";
             output += "\n";
-        }
-        else
-        {
+            output += "Maximum Solar Radiation[1.5m] = " + statistics.get(StatsType.MAXIMUM).get(SRAD).getValue()
+                    + " C at " + statistics.get(StatsType.MAXIMUM).get(SRAD).getStid();
             output += "\n";
-            output += "Maximum Solar Radiation[1.5m] = " + statistics.get(StatsType.MAXIMUM).get(SRAD).getValue() + " C at " + statistics.get(StatsType.MAXIMUM).get(SRAD).getStid();
+            output += "Minimum Solar Radiation[1.5m] = " + statistics.get(StatsType.MINIMUM).get(SRAD).getValue()
+                    + " C at " + statistics.get(StatsType.MINIMUM).get(SRAD).getStid();
             output += "\n";
-            output += "Minimum Solar Radiation[1.5m] = " + statistics.get(StatsType.MINIMUM).get(SRAD).getValue() + " C at " + statistics.get(StatsType.MINIMUM).get(SRAD).getStid();
-            output += "\n";
-            output += "Average Solar Radiation[1.5m] = " + statistics.get(StatsType.AVERAGE).get(SRAD).getValue() + " C at " + statistics.get(StatsType.AVERAGE).get(SRAD).getStid();
+            output += "Average Solar Radiation[1.5m] = " + statistics.get(StatsType.AVERAGE).get(SRAD).getValue()
+                    + " C at " + statistics.get(StatsType.AVERAGE).get(SRAD).getStid();
             output += "\n";
         }
         for (int i = 0; i < 58; ++i)
