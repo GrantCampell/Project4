@@ -166,7 +166,6 @@ public class MapData
      */
     private void parseParamHeader(String inParamString) throws IOException
     {
-        // TODO: Test this
         BufferedReader br = new BufferedReader(new FileReader(fileName));
 
         // String containing a line of data from the file
@@ -258,7 +257,6 @@ public class MapData
             ++numberOfStations;
         }
 
-        // TODO: THESE TEMP ARRAYS NEED TO BE STORED IN DATA CATALOG
         // TODO: This is temporary. I need a way to implement prepareDataCatalog
         dataCatalog.put(TAIR, tairData);
         dataCatalog.put(TA9M, ta9mData);
@@ -452,12 +450,12 @@ public class MapData
         output += "\n";
 
         // Determines if there is too much missing data to print tair statistics
-        // if ((numberOfStations - XXX > NUMBER_OF_MISSING_OBSERVATIONS)
-        // {
-        // output += "Not enough valid air temperature data";
-        // output += "\n";
-        // }
-        // else
+         if ((numberOfStations - goodTairCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
+         {
+         output += "Not enough valid air temperature data";
+         output += "\n";
+         }
+         else
         {
             output += "Maximum Air Temperature[1.5m] = " + statistics.get(StatsType.MAXIMUM).get("TAIRMax").getValue()
                     + " C at " + statistics.get(StatsType.MAXIMUM).get("TAIRMax").getStid();
@@ -481,12 +479,12 @@ public class MapData
         }
 
         // Determines if there is too much data missing to print ta9m statistics
-        // if ((numberOfStations - ta9mValid.size()) > NUMBER_OF_MISSING_OBSERVATIONS)
-        // {
-        // output += "Not enough valid air temperature at 9 meters data";
-        // output += "\n";
-        // }
-        // else
+         if ((numberOfStations - goodTa9mCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
+         {
+         output += "Not enough valid air temperature at 9 meters data";
+         output += "\n";
+         }
+         else
         {
             output += "\n";
             output += "Maximum Air Temperature[9.0m] = " + statistics.get(StatsType.MAXIMUM).get("TA9MMax").getValue()
@@ -510,14 +508,13 @@ public class MapData
             output += "=";
         }
 
-        // TODO: FIX THESE
         // Determines if there is too much missing data to print srad statistics
-        // if ((numberOfStations - sradValid.size()) > NUMBER_OF_MISSING_OBSERVATIONS)
-        // {
-        // output += "Not enough valid solar radiation data";
-        // output += "\n";
-        // }
-        // else
+         if ((numberOfStations - goodSradCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
+         {
+         output += "Not enough valid solar radiation data";
+         output += "\n";
+         }
+         else
         {
             output += "\n";
             output += "Maximum Solar Radiation[1.5m] = " + statistics.get(StatsType.MAXIMUM).get("SRADMax").getValue()
