@@ -1,7 +1,7 @@
 /**
  * 
  * @author Grant Campbell
- * @version 10/29/2018
+ * @version 10/28/2018
  * 
  *          AbstractObservation is used to hold information taken in from the
  *          data.
