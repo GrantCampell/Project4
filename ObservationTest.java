@@ -2,6 +2,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * 
+ * @author Grant Campbell
+ * @version 10/28/2018
+ * 
+ *          Tests the methods and code from the Observation class
+ */
 public class ObservationTest
 {
 
