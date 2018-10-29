@@ -270,7 +270,7 @@ public class Statistics extends Observation
      * 
      * @return utcDateTime
      */
-    public String getUTCDateTime()
+    public String getUTCDateTimeString()
     {
         return createStringFromDate(utcDateTime);
     }
@@ -449,23 +449,176 @@ public class Statistics extends Observation
         return isSameAs;
     }
 
+    /**
+     * Checks to see if a ZonedDateTime contains a date newer than a specified date.
+     * 
+     * @return Whether or not the ZonedDateTime is newer than inDateTime
+     */
     public boolean newerThan(ZonedDateTime inDateTime)
     {
-        // TODO: Complete this method
-        return true;
-        ;
+        boolean isNewerThan = false;
+
+        if (utcDateTime.get(Calendar.YEAR) == inDateTime.getYear())
+        {
+            // NEXT LAYER
+            if (utcDateTime.get(Calendar.MONTH) == inDateTime.getMonthValue())
+            {
+                // NEXT LAYER
+                if (utcDateTime.get(Calendar.DAY_OF_MONTH) == inDateTime.getDayOfMonth())
+                {
+                    // NEXT LAYER
+                    {
+                        if (utcDateTime.get(Calendar.HOUR_OF_DAY) == inDateTime.getHour())
+                        {
+                            // NEXT LAYER
+                            if (utcDateTime.get(Calendar.MINUTE) == inDateTime.getMinute())
+                            {
+                                isNewerThan = false;
+                            }
+                            else if (utcDateTime.get(Calendar.MINUTE) > inDateTime.getMinute())
+                            {
+                                isNewerThan = true;
+                            }
+                            else
+                            {
+                                isNewerThan = false;
+                            }
+                        }
+                        else if (utcDateTime.get(Calendar.HOUR_OF_DAY) > inDateTime.getHour())
+                        {
+                            isNewerThan = true;
+                        }
+                        else
+                        {
+                            isNewerThan = false;
+                        }
+                    }
+                }
+                else if (utcDateTime.get(Calendar.DAY_OF_MONTH) > inDateTime.getDayOfMonth())
+                {
+                    isNewerThan = true;
+                }
+                else
+                {
+                    isNewerThan = false;
+                }
+            }
+            else if (utcDateTime.get(Calendar.MONTH) > inDateTime.getMonthValue())
+            {
+                isNewerThan = true;
+            }
+            else
+            {
+                isNewerThan = false;
+            }
+        }
+        else if (utcDateTime.get(Calendar.YEAR) > inDateTime.getYear())
+        {
+            isNewerThan = true;
+        }
+        else
+        {
+            isNewerThan = false;
+        }
+
+        return isNewerThan;
     }
 
+    /**
+     * Checks to see if a ZonedDateTime contains a date older than a specified date.
+     * 
+     * @return Whether or not the ZonedDateTime is older than inDateTime
+     */
     public boolean olderThan(ZonedDateTime inDateTime)
     {
-        // TODO: Complete this method
-        return true;
+        boolean isOlderThan = false;
+
+        if (utcDateTime.get(Calendar.YEAR) == inDateTime.getYear())
+        {
+            // NEXT LAYER
+            if (utcDateTime.get(Calendar.MONTH) == inDateTime.getMonthValue())
+            {
+                // NEXT LAYER
+                if (utcDateTime.get(Calendar.DAY_OF_MONTH) == inDateTime.getDayOfMonth())
+                {
+                    // NEXT LAYER
+                    {
+                        if (utcDateTime.get(Calendar.HOUR_OF_DAY) == inDateTime.getHour())
+                        {
+                            // NEXT LAYER
+                            if (utcDateTime.get(Calendar.MINUTE) == inDateTime.getMinute())
+                            {
+                                isOlderThan = false;
+                            }
+                            else if (utcDateTime.get(Calendar.MINUTE) < inDateTime.getMinute())
+                            {
+                                isOlderThan = true;
+                            }
+                            else
+                            {
+                                isOlderThan = false;
+                            }
+                        }
+                        else if (utcDateTime.get(Calendar.HOUR_OF_DAY) < inDateTime.getHour())
+                        {
+                            isOlderThan = true;
+                        }
+                        else
+                        {
+                            isOlderThan = false;
+                        }
+                    }
+                }
+                else if (utcDateTime.get(Calendar.DAY_OF_MONTH) < inDateTime.getDayOfMonth())
+                {
+                    isOlderThan = true;
+                }
+                else
+                {
+                    isOlderThan = false;
+                }
+            }
+            else if (utcDateTime.get(Calendar.MONTH) < inDateTime.getMonthValue())
+            {
+                isOlderThan = true;
+            }
+            else
+            {
+                isOlderThan = false;
+            }
+        }
+        else if (utcDateTime.get(Calendar.YEAR) < inDateTime.getYear())
+        {
+            isOlderThan = true;
+        }
+        else
+        {
+            isOlderThan = false;
+        }
+
+        return isOlderThan;
     }
 
+    /**
+     * Checks to see if a ZonedDateTime contains a the same date as a specified
+     * date.
+     * 
+     * @return Whether or not the ZonedDateTime is the same as inDateTime
+     */
     public boolean sameAs(ZonedDateTime inDateTime)
     {
-        // TODO: Complete this method
-        return true;
+        boolean isSameAs = false;
+
+        if (utcDateTime.get(Calendar.YEAR) == inDateTime.getYear()
+                && utcDateTime.get(Calendar.MONTH) == inDateTime.getMonthValue()
+                && utcDateTime.get(Calendar.DAY_OF_MONTH) == inDateTime.getDayOfMonth()
+                && utcDateTime.get(Calendar.HOUR_OF_DAY) == inDateTime.getHour()
+                && utcDateTime.get(Calendar.MINUTE) == inDateTime.getMinute())
+        {
+            isSameAs = true;
+        }
+
+        return isSameAs;
     }
 
     public String toString()
