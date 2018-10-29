@@ -349,6 +349,12 @@ public class Statistics extends Observation
 
     public String toString()
     {
-        return "";
+        //TODO: FIX THIS. I WANT TO USE IT IN THE ULTIMATE TO STRING
+        String out = "";
+        
+        out += this.getStid();
+        out += this.getValue();
+        
+        return out;
     }
 }

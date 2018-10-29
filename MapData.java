@@ -18,6 +18,9 @@ public class MapData
     private EnumMap<StatsType, TreeMap<String, Statistics>> statistics = new EnumMap<>(StatsType.class);
 
     private TreeMap<String, Integer> paramPositions = new TreeMap<>();
+    
+    //TODO: THIS MIGHT NEED TO COME OUT LATER
+    TreeMap<String, Statistics> temp = new TreeMap<>();
 
     /**
      * An int value of 10, that is the number of missing observations
@@ -340,7 +343,7 @@ public class MapData
         Statistics statAverage = new Statistics(averageValue, MESONET, utcDateTime, validList.size(),
                 StatsType.AVERAGE);
 
-        TreeMap<String, Statistics> temp = new TreeMap<>();
+        
 
         temp.put(paramId, statMin);
         statistics.put(StatsType.MINIMUM, temp);
@@ -350,6 +353,9 @@ public class MapData
 
         temp.put(paramId, statAverage);
         statistics.put(StatsType.AVERAGE, temp);
+        
+        //TODO: The calculators are broken. It stores a value that is not the samllest.
+        System.out.println(statistics.get(StatsType.MINIMUM).get(TAIR));
     }
 
     private void prepareDataCatalog()
@@ -360,9 +366,9 @@ public class MapData
     private void calculateStatistics()
     {
         // TODO: Complete this method
-        calculateAllStatistics((ArrayList<Observation>) dataCatalog.get(TAIR), TAIR);
-        calculateAllStatistics((ArrayList<Observation>) dataCatalog.get(TA9M), TA9M);
-        calculateAllStatistics((ArrayList<Observation>) dataCatalog.get(SRAD), SRAD);
+        calculateAllStatistics(dataCatalog.get(TAIR), TAIR);
+        calculateAllStatistics(dataCatalog.get(TA9M), TA9M);
+        calculateAllStatistics(dataCatalog.get(SRAD), SRAD);
     }
 
     /**
@@ -374,6 +380,14 @@ public class MapData
      */
     public String toString()
     {
+        
+        //TODO: THIS IS THE SPOT
+        System.out.println(statistics.get(StatsType.MINIMUM).get(TAIR));
+        
+        
+        
+        
+        
         // TODO: Adjust
         String fileYear = String.valueOf(utcDateTime.get(Calendar.YEAR));
 
@@ -440,7 +454,7 @@ public class MapData
         // output += "\n";
         // }
         // else
-        {
+        {   
             output += "Maximum Air Temperature[1.5m] = " + statistics.get(StatsType.MAXIMUM).get(TAIR).getValue()
                     + " C at " + statistics.get(StatsType.MAXIMUM).get(TAIR).getStid();
             output += "\n";
