@@ -13,8 +13,6 @@ public class MapData
 {
     private HashMap<String, ArrayList<Observation>> dataCatalog = new HashMap<>();
 
-    // TODO: THIS IS HOW WERE STrOING THE AVG< MAX< MIN. IT IS A STATISTIC WHICH
-    // WILL BE PUT IN THIS MAP
     private EnumMap<StatsType, TreeMap<String, Statistics>> statistics = new EnumMap<>(StatsType.class);
 
     private TreeMap<String, Integer> paramPositions = new TreeMap<>();
@@ -22,6 +20,11 @@ public class MapData
     // TODO: THIS MIGHT NEED TO COME OUT LATER
     TreeMap<String, Statistics> tempStatHolder = new TreeMap<>();
 
+    private int goodTairCounter = 0;
+    
+    private int goodTa9mCounter = 0;
+    
+    private int goodSradCounter = 0;
     /**
      * An int value of 10, that is the number of missing observations
      */
@@ -88,7 +91,6 @@ public class MapData
      */
     public MapData(int year, int month, int day, int hour, int minute, String directory)
     {
-        // TODO: Rewrite
         utcDateTime = new GregorianCalendar(year, month, day, hour, minute);
         fileName = createFileName(year, month, day, hour, minute, directory);
     }
@@ -210,7 +212,6 @@ public class MapData
      */
     public void parseFile() throws IOException
     {
-        // TODO: Fix method
         parseParamHeader(TA9M);
         parseParamHeader(SRAD);
         parseParamHeader(TAIR);
@@ -281,7 +282,6 @@ public class MapData
      */
     private void calculateAllStatistics(ArrayList<Observation> inData, String paramId)
     {
-        // TODO: Rewrite
         // Sorts through the data and finds all of the valid observations
         ArrayList<Observation> validList = new ArrayList<Observation>();
         for (int i = 0; i < numberOfStations; ++i)
@@ -290,6 +290,19 @@ public class MapData
             {
                 // The valid data is stored in a new ArrayList
                 validList.add(inData.get(i));
+                
+                if(paramId.equalsIgnoreCase(TAIR))
+                {
+                    ++goodTairCounter;
+                }
+                else if(paramId.equalsIgnoreCase(TA9M))
+                {
+                    ++goodTa9mCounter;
+                }
+                else
+                {
+                    ++goodSradCounter;
+                }
             }
         }
 
@@ -365,7 +378,6 @@ public class MapData
 
     private void calculateStatistics()
     {
-        // TODO: Complete this method
         calculateAllStatistics(dataCatalog.get(TAIR), TAIR);
         calculateAllStatistics(dataCatalog.get(TA9M), TA9M);
         calculateAllStatistics(dataCatalog.get(SRAD), SRAD);
@@ -381,7 +393,6 @@ public class MapData
     public String toString()
     {
 
-        // TODO: Adjust
         String fileYear = String.valueOf(utcDateTime.get(Calendar.YEAR));
 
         // If any value is a one-digit number, a 0 is put in front of it
