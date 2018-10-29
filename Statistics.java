@@ -24,7 +24,7 @@ public class Statistics extends Observation
 
     protected void DateTimeFormatter()
     {
-        // TODO: Complete this method
+        this.getUTCDateTimeString();
     }
 
     /**
