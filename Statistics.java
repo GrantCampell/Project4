@@ -1,3 +1,4 @@
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -8,11 +9,18 @@ public class Statistics extends Observation
      */
     protected final String DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH";
 
+    protected void DateTimeFormatter()
+    {
+        //TODO: Complete this method
+    }
+    
     /**
      * A GregorianCalendar that contains the date of the data collection
      */
     private GregorianCalendar utcDateTime;
 
+    private ZonedDateTime zdtDateTime;
+    
     /**
      * An int value containing the number of stations reporting valid data
      */
@@ -97,6 +105,11 @@ public class Statistics extends Observation
         GregorianCalendar gregDate = new GregorianCalendar(year, month, day, hour, minute);
         return gregDate;
     }
+    
+    public ZonedDateTime createZDateFromString(String dateTimeStr)
+    {
+        //TODO: Complete this method
+    }
 
     /**
      * Creates a String containing the date and time from a GregorianCalendar
@@ -151,6 +164,11 @@ public class Statistics extends Observation
         }
 
         return year + "-" + month + "-" + day + "'" + hour + "'" + minute;
+    }
+    
+    public String createStringFromDate(ZonedDateTime calendar)
+    {
+        //TODO: COmplete this method
     }
 
     /**
@@ -345,6 +363,21 @@ public class Statistics extends Observation
         }
 
         return isSameAs;
+    }
+    
+    public boolean newerThan(ZonedDateTime inDateTime)
+    {
+        //TODO: Complete this method
+    }
+    
+    public boolean olderThan(ZonedDateTime inDateTime)
+    {
+        //TODO: Complete this method
+    }
+    
+    public boolean sameAs(ZonedDateTime inDateTime)
+    {
+        //TODO: Complete this method
     }
 
     public String toString()
