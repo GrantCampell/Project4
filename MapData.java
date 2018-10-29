@@ -18,8 +18,8 @@ public class MapData
     private EnumMap<StatsType, TreeMap<String, Statistics>> statistics = new EnumMap<>(StatsType.class);
 
     private TreeMap<String, Integer> paramPositions = new TreeMap<>();
-    
-    //TODO: THIS MIGHT NEED TO COME OUT LATER
+
+    // TODO: THIS MIGHT NEED TO COME OUT LATER
     TreeMap<String, Statistics> tempStatHolder = new TreeMap<>();
 
     /**
@@ -343,24 +343,19 @@ public class MapData
         Statistics statAverage = new Statistics(averageValue, MESONET, utcDateTime, validList.size(),
                 StatsType.AVERAGE);
 
-        
+        String one = paramId + "Min";
+        String two = paramId + "Max";
+        String three = paramId + "Average";
 
-        tempStatHolder.put(paramId, statMin);
+        tempStatHolder.put(one, statMin);
+        tempStatHolder.put(two, statMax);
+        tempStatHolder.put(three, statAverage);
+
         statistics.put(StatsType.MINIMUM, tempStatHolder);
-        
-        System.out.println(statistics.get(StatsType.MINIMUM).get(TAIR));
 
-        tempStatHolder.put(paramId, statMax);
         statistics.put(StatsType.MAXIMUM, tempStatHolder);
-        
- //       System.out.println(statistics.get(StatsType.MAXIMUM).get(TAIR));
 
-        tempStatHolder.put(paramId, statAverage);
         statistics.put(StatsType.AVERAGE, tempStatHolder);
-        
-        System.out.println(statistics.get(StatsType.AVERAGE).get(TAIR));
-        
-        //TODO: The calculators are broken. It stores a value that is not the samllest.
     }
 
     private void prepareDataCatalog()
@@ -384,8 +379,8 @@ public class MapData
      * @return output the final output String that will print to the console
      */
     public String toString()
-    {   
-        
+    {
+
         // TODO: Adjust
         String fileYear = String.valueOf(utcDateTime.get(Calendar.YEAR));
 
@@ -452,15 +447,16 @@ public class MapData
         // output += "\n";
         // }
         // else
-        {   
-            output += "Maximum Air Temperature[1.5m] = " + statistics.get(StatsType.MAXIMUM).get(TAIR).getValue()
-                    + " C at " + statistics.get(StatsType.MAXIMUM).get(TAIR).getStid();
+        {
+            output += "Maximum Air Temperature[1.5m] = " + statistics.get(StatsType.MAXIMUM).get("TAIRMax").getValue()
+                    + " C at " + statistics.get(StatsType.MAXIMUM).get("TAIRMax").getStid();
             output += "\n";
-            output += "Minimum Air Temperature[1.5m] = " + statistics.get(StatsType.MINIMUM).get(TAIR).getValue()
-                    + " C at " + statistics.get(StatsType.MINIMUM).get(TAIR).getStid();
+            output += "Minimum Air Temperature[1.5m] = " + statistics.get(StatsType.MINIMUM).get("TAIRMin").getValue()
+                    + " C at " + statistics.get(StatsType.MINIMUM).get("TAIRMin").getStid();
             output += "\n";
-            output += "Average Air Temperature[1.5m] = " + statistics.get(StatsType.AVERAGE).get(TAIR).getValue()
-                    + " C at " + statistics.get(StatsType.AVERAGE).get(TAIR).getStid();
+            output += "Average Air Temperature[1.5m] = "
+                    + statistics.get(StatsType.AVERAGE).get("TAIRAverage").getValue() + " C at "
+                    + statistics.get(StatsType.AVERAGE).get("TAIRAverage").getStid();
             output += "\n";
         }
         for (int i = 0; i < 58; ++i)
@@ -482,14 +478,15 @@ public class MapData
         // else
         {
             output += "\n";
-            output += "Maximum Air Temperature[9.0m] = " + statistics.get(StatsType.MAXIMUM).get(TA9M).getValue()
-                    + " C at " + statistics.get(StatsType.MAXIMUM).get(TA9M).getStid();
+            output += "Maximum Air Temperature[9.0m] = " + statistics.get(StatsType.MAXIMUM).get("TA9MMax").getValue()
+                    + " C at " + statistics.get(StatsType.MAXIMUM).get("TA9MMin").getStid();
             output += "\n";
-            output += "Minimum Air Temperature[9.0m] = " + statistics.get(StatsType.MINIMUM).get(TA9M).getValue()
-                    + " C at " + statistics.get(StatsType.MINIMUM).get(TA9M).getStid();
+            output += "Minimum Air Temperature[9.0m] = " + statistics.get(StatsType.MINIMUM).get("TA9MMin").getValue()
+                    + " C at " + statistics.get(StatsType.MINIMUM).get("TA9MMax").getStid();
             output += "\n";
-            output += "Average Air Temperature[9.0m] = " + statistics.get(StatsType.AVERAGE).get(TA9M).getValue()
-                    + " C at " + statistics.get(StatsType.AVERAGE).get(TA9M).getStid();
+            output += "Average Air Temperature[9.0m] = "
+                    + statistics.get(StatsType.AVERAGE).get("TA9MAverage").getValue() + " C at "
+                    + statistics.get(StatsType.AVERAGE).get("TA9MAverage").getStid();
             output += "\n";
         }
         for (int i = 0; i < 58; ++i)
@@ -512,14 +509,15 @@ public class MapData
         // else
         {
             output += "\n";
-            output += "Maximum Solar Radiation[1.5m] = " + statistics.get(StatsType.MAXIMUM).get(SRAD).getValue()
-                    + " C at " + statistics.get(StatsType.MAXIMUM).get(SRAD).getStid();
+            output += "Maximum Solar Radiation[1.5m] = " + statistics.get(StatsType.MAXIMUM).get("SRADMax").getValue()
+                    + " W/m^2 at " + statistics.get(StatsType.MAXIMUM).get("SRADMax").getStid();
             output += "\n";
-            output += "Minimum Solar Radiation[1.5m] = " + statistics.get(StatsType.MINIMUM).get(SRAD).getValue()
-                    + " C at " + statistics.get(StatsType.MINIMUM).get(SRAD).getStid();
+            output += "Minimum Solar Radiation[1.5m] = " + statistics.get(StatsType.MINIMUM).get("SRADMin").getValue()
+                    + " W/m^2 at " + statistics.get(StatsType.MINIMUM).get("SRADMin").getStid();
             output += "\n";
-            output += "Average Solar Radiation[1.5m] = " + statistics.get(StatsType.AVERAGE).get(SRAD).getValue()
-                    + " C at " + statistics.get(StatsType.AVERAGE).get(SRAD).getStid();
+            output += "Average Solar Radiation[1.5m] = "
+                    + statistics.get(StatsType.AVERAGE).get("SRADAverage").getValue() + " W/m^2 at "
+                    + statistics.get(StatsType.AVERAGE).get("SRADAverage").getStid();
             output += "\n";
         }
         for (int i = 0; i < 58; ++i)
