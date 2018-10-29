@@ -1,6 +1,6 @@
 /**
  * @author Grant Campbell
- * @version 10/29/2018
+ * @version 10/28/2018
  * 
  *          An Enum that stores the four major statistics that will be
  *          calculated by the program.
