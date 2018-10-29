@@ -28,12 +28,6 @@ public class MapData
     private TreeMap<String, Integer> paramPositions = new TreeMap<>();
 
     TreeMap<String, Statistics> tempStatHolder = new TreeMap<>();
-
-    private int goodTairCounter = 0;
-
-    private int goodTa9mCounter = 0;
-
-    private int goodSradCounter = 0;
     /**
      * An int value of 10, that is the number of missing observations
      */
@@ -297,19 +291,6 @@ public class MapData
             {
                 // The valid data is stored in a new ArrayList
                 validList.add(inData.get(i));
-
-                if (paramId.equalsIgnoreCase(TAIR))
-                {
-                    ++goodTairCounter;
-                }
-                else if (paramId.equalsIgnoreCase(TA9M))
-                {
-                    ++goodTa9mCounter;
-                }
-                else
-                {
-                    ++goodSradCounter;
-                }
             }
         }
 
@@ -363,6 +344,8 @@ public class MapData
         Statistics statAverage = new Statistics(averageValue, MESONET, utcDateTime, validList.size(),
                 StatsType.AVERAGE);
 
+        Statistics statTotal = new Statistics(sum, MESONET, utcDateTime, validList.size(), StatsType.AVERAGE);
+
         String one = paramId + "Min";
         String two = paramId + "Max";
         String three = paramId + "Average";
@@ -376,6 +359,14 @@ public class MapData
         statistics.put(StatsType.MAXIMUM, tempStatHolder);
 
         statistics.put(StatsType.AVERAGE, tempStatHolder);
+
+        if (paramId.equalsIgnoreCase(SRAD))
+        {
+            String four = paramId + "Total";
+            tempStatHolder.put(four, statTotal);
+
+            statistics.put(StatsType.TOTAL, tempStatHolder);
+        }
     }
 
     /**
@@ -462,7 +453,8 @@ public class MapData
         output += "\n";
 
         // Determines if there is too much missing data to print tair statistics
-        if ((numberOfStations - goodTairCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
+        if ((numberOfStations - statistics.get(StatsType.MAXIMUM).get("TAIRMax")
+                .getNumberOfReportingStations()) > NUMBER_OF_MISSING_OBSERVATIONS)
         {
             output += "Not enough valid air temperature data";
             output += "\n";
@@ -491,7 +483,8 @@ public class MapData
         }
 
         // Determines if there is too much data missing to print ta9m statistics
-        if ((numberOfStations - goodTa9mCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
+        if ((numberOfStations - statistics.get(StatsType.MAXIMUM).get("TA9MMax")
+                .getNumberOfReportingStations()) > NUMBER_OF_MISSING_OBSERVATIONS)
         {
             output += "\nNot enough valid air temperature at 9 meters data";
             output += "\n";
@@ -521,7 +514,8 @@ public class MapData
         }
 
         // Determines if there is too much missing data to print srad statistics
-        if ((numberOfStations - goodSradCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
+        if ((numberOfStations - statistics.get(StatsType.MAXIMUM).get("SRADMax")
+                .getNumberOfReportingStations()) > NUMBER_OF_MISSING_OBSERVATIONS)
         {
             output += "\nNot enough valid solar radiation data";
             output += "\n";

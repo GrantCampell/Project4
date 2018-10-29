@@ -5,10 +5,15 @@ import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * 
+ * @author Grant Campbell
+ * @version 10/28/2018
+ * 
+ *          Tests for the MapData class.
+ */
 public class MapDataTest
 {
-
-    // TODO: Add new tests for new classes
 
     /**
      * A MapData object called tester that is used in testing
@@ -20,7 +25,7 @@ public class MapDataTest
      * points in every category.
      */
     MapData tester2 = new MapData(2018, 8, 30, 17, 45, "data");
-    
+
     /**
      * A MapData object to be used in testing. Has a two digit month.
      */
@@ -67,7 +72,8 @@ public class MapDataTest
                         + "==========================================================\n"
                         + "Not enough valid solar radiation data\n"
                         + "==========================================================");
-        
-        tester3.createFileName(2018, 10, 30, 17, 45, "data");
+
+        tester3.parseFile();
+        tester3.toString();
     }
 }
