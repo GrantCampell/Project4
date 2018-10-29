@@ -20,7 +20,7 @@ public class MapData
     private TreeMap<String, Integer> paramPositions = new TreeMap<>();
     
     //TODO: THIS MIGHT NEED TO COME OUT LATER
-    TreeMap<String, Statistics> temp = new TreeMap<>();
+    TreeMap<String, Statistics> tempStatHolder = new TreeMap<>();
 
     /**
      * An int value of 10, that is the number of missing observations
@@ -345,17 +345,22 @@ public class MapData
 
         
 
-        temp.put(paramId, statMin);
-        statistics.put(StatsType.MINIMUM, temp);
+        tempStatHolder.put(paramId, statMin);
+        statistics.put(StatsType.MINIMUM, tempStatHolder);
+        
+        System.out.println(statistics.get(StatsType.MINIMUM).get(TAIR));
 
-        temp.put(paramId, statMax);
-        statistics.put(StatsType.MAXIMUM, temp);
+        tempStatHolder.put(paramId, statMax);
+        statistics.put(StatsType.MAXIMUM, tempStatHolder);
+        
+ //       System.out.println(statistics.get(StatsType.MAXIMUM).get(TAIR));
 
-        temp.put(paramId, statAverage);
-        statistics.put(StatsType.AVERAGE, temp);
+        tempStatHolder.put(paramId, statAverage);
+        statistics.put(StatsType.AVERAGE, tempStatHolder);
+        
+        System.out.println(statistics.get(StatsType.AVERAGE).get(TAIR));
         
         //TODO: The calculators are broken. It stores a value that is not the samllest.
-        System.out.println(statistics.get(StatsType.MINIMUM).get(TAIR));
     }
 
     private void prepareDataCatalog()
@@ -379,14 +384,7 @@ public class MapData
      * @return output the final output String that will print to the console
      */
     public String toString()
-    {
-        
-        //TODO: THIS IS THE SPOT
-        System.out.println(statistics.get(StatsType.MINIMUM).get(TAIR));
-        
-        
-        
-        
+    {   
         
         // TODO: Adjust
         String fileYear = String.valueOf(utcDateTime.get(Calendar.YEAR));
