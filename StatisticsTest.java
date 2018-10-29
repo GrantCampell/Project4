@@ -271,6 +271,15 @@ public class StatisticsTest
     }
 
     /**
+     * Tests the getZDTDateTime method
+     */
+    @Test
+    public void testGetZDTDateTime()
+    {
+        Assert.assertEquals(testStat2.getZDTDateTimeString(), "2018-08-30'17'45");
+    }
+
+    /**
      * Tests the newerThan methods for both GregorianCalendar and ZonedDateTime
      */
     @Test
