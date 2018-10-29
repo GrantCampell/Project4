@@ -1,26 +1,42 @@
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/**
+ * @author Grant Campbell
+ * @version 10/28/2018
+ * 
+ *          A class that stores information about the most notable observatoins
+ *          from the data read in. It is used to store the minimum, maximum,
+ *          average, and total values. It is also used to turn Strings into
+ *          GregorianCalendars and ZonedDateTimes and comparing dates to each
+ *          other.
+ */
 public class Statistics extends Observation
 {
     /**
-     * A immutable String that contains the format of a date time String
+     * An immutable String that contains the format of a date time String
      */
     protected final String DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH";
 
     protected void DateTimeFormatter()
     {
-        //TODO: Complete this method
+        // TODO: Complete this method
     }
-    
+
     /**
      * A GregorianCalendar that contains the date of the data collection
      */
     private GregorianCalendar utcDateTime;
 
+    /**
+     * A ZonedDateTime that contains the date of the data collection
+     */
     private ZonedDateTime zdtDateTime;
-    
+
     /**
      * An int value containing the number of stations reporting valid data
      */
@@ -33,26 +49,28 @@ public class Statistics extends Observation
 
     /**
      * A constructor for the Statistics class that stores data in a Statistics
-     * object if the date is passed in as a String.
+     * object if the date is passed in as a ZonedDateTime.
      * 
      * @param value
      *            The value of a Statistics object
      * @param stid
      *            The Station ID of a Statistics object
-     * @param dateTimeStr
-     *            The Sting that contains the date and time of data collection.
+     * @param ZonedDateTime
+     *            The ZonedDateTime containing the date and time of the data
+     *            requested.
      * @param numberOfValidStations
      *            The number of stations that reported valid data for that
      *            Statistics object
      * @param inStatType
      *            The StatsType that the Statistics object contains
      */
-    public Statistics(double value, String stid, String dateTimeStr, int numberOfValidStations, StatsType inStatType)
+    public Statistics(double value, String stid, ZonedDateTime dateTime, int numberOfValidStations,
+            StatsType inStatType)
     {
         super(value, stid);
-        utcDateTime = createDateFromString(dateTimeStr);
-        numberOfReportingStations = numberOfValidStations;
-        statType = inStatType;
+        this.zdtDateTime = dateTime;
+        this.numberOfReportingStations = numberOfValidStations;
+        this.statType = inStatType;
     }
 
     /**
@@ -105,10 +123,33 @@ public class Statistics extends Observation
         GregorianCalendar gregDate = new GregorianCalendar(year, month, day, hour, minute);
         return gregDate;
     }
-    
+
+    /**
+     * Creates a ZonedDateTime from a String that contains the date and time
+     * 
+     * @param dateTimeStr
+     *            A string containing the date and time of data collection
+     * @return The GregorianCalendar containing the date and time form the String
+     */
     public ZonedDateTime createZDateFromString(String dateTimeStr)
     {
-        //TODO: Complete this method
+        String[] temp = new String[3];
+        String[] temp2 = new String[3];
+
+        temp = dateTimeStr.split("-");
+        temp2 = temp[2].split("'");
+
+        int year = Integer.parseInt(temp[0]);
+        int month = Integer.parseInt(temp[1]);
+        int day = Integer.parseInt(temp2[0]);
+        int hour = Integer.parseInt(temp2[1]);
+        int minute = Integer.parseInt(temp2[2]);
+
+        LocalDateTime localDate = LocalDateTime.of(year, month, day, hour, minute);
+
+        ZonedDateTime zonedDate = ZonedDateTime.of(localDate, ZoneId.of("America/Chicago"));
+
+        return zonedDate;
     }
 
     /**
@@ -165,10 +206,53 @@ public class Statistics extends Observation
 
         return year + "-" + month + "-" + day + "'" + hour + "'" + minute;
     }
-    
-    public String createStringFromDate(ZonedDateTime calendar)
+
+    public String createStringFromDate(ZonedDateTime inCalendar)
     {
-        //TODO: COmplete this method
+        String year = String.valueOf(inCalendar.getYear());
+
+        // If any value is a one-digit number, a 0 is put in front of it
+        String month;
+        if (inCalendar.getMonthValue() < 10)
+        {
+            month = "0" + String.valueOf(inCalendar.getMonthValue());
+        }
+        else
+        {
+            month = String.valueOf(inCalendar.getMonthValue());
+        }
+
+        String day;
+        if (inCalendar.getDayOfMonth() < 10)
+        {
+            day = "0" + String.valueOf(inCalendar.getDayOfMonth());
+        }
+        else
+        {
+            day = String.valueOf(inCalendar.getDayOfMonth());
+        }
+
+        String hour;
+        if (inCalendar.getHour() < 10)
+        {
+            hour = "0" + String.valueOf(inCalendar.getHour());
+        }
+        else
+        {
+            hour = String.valueOf(inCalendar.getHour());
+        }
+
+        String minute;
+        if (inCalendar.getMinute() < 10)
+        {
+            minute = "0" + String.valueOf(inCalendar.getMinute());
+        }
+        else
+        {
+            minute = String.valueOf(inCalendar.getMinute());
+        }
+
+        return year + "-" + month + "-" + day + "'" + hour + "'" + minute;
     }
 
     /**
@@ -364,31 +448,34 @@ public class Statistics extends Observation
 
         return isSameAs;
     }
-    
+
     public boolean newerThan(ZonedDateTime inDateTime)
     {
-        //TODO: Complete this method
+        // TODO: Complete this method
+        return true;
+        ;
     }
-    
+
     public boolean olderThan(ZonedDateTime inDateTime)
     {
-        //TODO: Complete this method
+        // TODO: Complete this method
+        return true;
     }
-    
+
     public boolean sameAs(ZonedDateTime inDateTime)
     {
-        //TODO: Complete this method
+        // TODO: Complete this method
+        return true;
     }
 
     public String toString()
     {
-        //TODO: FIX THIS. I WANT TO USE IT IN THE ULTIMATE TO STRING
         String out = "";
-        
+
         out += this.getStid();
         out += " ";
         out += this.getValue();
-        
+
         return out;
     }
 }
