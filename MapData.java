@@ -9,21 +9,30 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+/**
+ * @author Grant Campbell
+ * @version 10/28/2018
+ * 
+ *          A class that takes in the time and date of a weather measurement,
+ *          and outputs a String containing the maximum, minimum, and average,
+ *          of the air temperature at 1.5 meters, the air temperature at 9
+ *          meters, and the solar radiation.
+ *
+ */
 public class MapData
 {
-    private HashMap<String, ArrayList<Observation>> dataCatalog = new HashMap<>();
+    private HashMap<String, ArrayList<Observation>> dataCatalog;
 
     private EnumMap<StatsType, TreeMap<String, Statistics>> statistics = new EnumMap<>(StatsType.class);
 
     private TreeMap<String, Integer> paramPositions = new TreeMap<>();
 
-    // TODO: THIS MIGHT NEED TO COME OUT LATER
     TreeMap<String, Statistics> tempStatHolder = new TreeMap<>();
 
     private int goodTairCounter = 0;
-    
+
     private int goodTa9mCounter = 0;
-    
+
     private int goodSradCounter = 0;
     /**
      * An int value of 10, that is the number of missing observations
@@ -93,6 +102,7 @@ public class MapData
     {
         utcDateTime = new GregorianCalendar(year, month, day, hour, minute);
         fileName = createFileName(year, month, day, hour, minute, directory);
+        prepareDataCatalog();
     }
 
     /**
@@ -184,6 +194,7 @@ public class MapData
         // Split this string into an array list.
         // This way if more variables are added in the future, the program can handle
         // them.
+
         ArrayList<String> header = new ArrayList<String>(Arrays.asList(strg.split("\\s+")));
 
         // The for loop will search for the correct parameters
@@ -197,7 +208,6 @@ public class MapData
                 break;
             }
         }
-
     }
 
     /**
@@ -257,7 +267,6 @@ public class MapData
             ++numberOfStations;
         }
 
-        // TODO: This is temporary. I need a way to implement prepareDataCatalog
         dataCatalog.put(TAIR, tairData);
         dataCatalog.put(TA9M, ta9mData);
         dataCatalog.put(SRAD, sradData);
@@ -288,12 +297,12 @@ public class MapData
             {
                 // The valid data is stored in a new ArrayList
                 validList.add(inData.get(i));
-                
-                if(paramId.equalsIgnoreCase(TAIR))
+
+                if (paramId.equalsIgnoreCase(TAIR))
                 {
                     ++goodTairCounter;
                 }
-                else if(paramId.equalsIgnoreCase(TA9M))
+                else if (paramId.equalsIgnoreCase(TA9M))
                 {
                     ++goodTa9mCounter;
                 }
@@ -369,9 +378,12 @@ public class MapData
         statistics.put(StatsType.AVERAGE, tempStatHolder);
     }
 
+    /**
+     * Initializes the dataCatalog for 'this' Object.
+     */
     private void prepareDataCatalog()
     {
-        // TODO: Complete this method
+        dataCatalog = new HashMap<>();
     }
 
     private void calculateStatistics()
@@ -450,12 +462,12 @@ public class MapData
         output += "\n";
 
         // Determines if there is too much missing data to print tair statistics
-         if ((numberOfStations - goodTairCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
-         {
-         output += "Not enough valid air temperature data";
-         output += "\n";
-         }
-         else
+        if ((numberOfStations - goodTairCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
+        {
+            output += "Not enough valid air temperature data";
+            output += "\n";
+        }
+        else
         {
             output += "Maximum Air Temperature[1.5m] = " + statistics.get(StatsType.MAXIMUM).get("TAIRMax").getValue()
                     + " C at " + statistics.get(StatsType.MAXIMUM).get("TAIRMax").getStid();
@@ -479,19 +491,19 @@ public class MapData
         }
 
         // Determines if there is too much data missing to print ta9m statistics
-         if ((numberOfStations - goodTa9mCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
-         {
-         output += "Not enough valid air temperature at 9 meters data";
-         output += "\n";
-         }
-         else
+        if ((numberOfStations - goodTa9mCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
+        {
+            output += "\nNot enough valid air temperature at 9 meters data";
+            output += "\n";
+        }
+        else
         {
             output += "\n";
             output += "Maximum Air Temperature[9.0m] = " + statistics.get(StatsType.MAXIMUM).get("TA9MMax").getValue()
-                    + " C at " + statistics.get(StatsType.MAXIMUM).get("TA9MMin").getStid();
+                    + " C at " + statistics.get(StatsType.MAXIMUM).get("TA9MMax").getStid();
             output += "\n";
             output += "Minimum Air Temperature[9.0m] = " + statistics.get(StatsType.MINIMUM).get("TA9MMin").getValue()
-                    + " C at " + statistics.get(StatsType.MINIMUM).get("TA9MMax").getStid();
+                    + " C at " + statistics.get(StatsType.MINIMUM).get("TA9MMin").getStid();
             output += "\n";
             output += "Average Air Temperature[9.0m] = "
                     + statistics.get(StatsType.AVERAGE).get("TA9MAverage").getValue() + " C at "
@@ -509,12 +521,12 @@ public class MapData
         }
 
         // Determines if there is too much missing data to print srad statistics
-         if ((numberOfStations - goodSradCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
-         {
-         output += "Not enough valid solar radiation data";
-         output += "\n";
-         }
-         else
+        if ((numberOfStations - goodSradCounter) > NUMBER_OF_MISSING_OBSERVATIONS)
+        {
+            output += "\nNot enough valid solar radiation data";
+            output += "\n";
+        }
+        else
         {
             output += "\n";
             output += "Maximum Solar Radiation[1.5m] = " + statistics.get(StatsType.MAXIMUM).get("SRADMax").getValue()
