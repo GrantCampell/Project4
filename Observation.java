@@ -1,4 +1,11 @@
-
+/**
+ * 
+ * @author Grant Campbell
+ * @version 10/28/2018
+ * 
+ *          Stores the value and ID collected by a station for air temperature
+ *          and solar radiation.
+ */
 public class Observation extends AbstractObservation
 {
     /**

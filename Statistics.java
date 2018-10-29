@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
@@ -24,7 +23,8 @@ public class Statistics extends Observation
 
     protected void DateTimeFormatter()
     {
-        this.getUTCDateTimeString();
+        this.createStringFromDate(utcDateTime);
+        statType.compareTo(StatsType.AVERAGE);
     }
 
     /**
@@ -55,7 +55,7 @@ public class Statistics extends Observation
      *            The value of a Statistics object
      * @param stid
      *            The Station ID of a Statistics object
-     * @param ZonedDateTime
+     * @param dateTime
      *            The ZonedDateTime containing the date and time of the data
      *            requested.
      * @param numberOfValidStations
@@ -266,19 +266,32 @@ public class Statistics extends Observation
     }
 
     /**
-     * Returns utcDateTime
+     * Returns utcDateTime as a String
      * 
-     * @return utcDateTime
+     * @return utcDateTime as a String
      */
     public String getUTCDateTimeString()
     {
+        this.DateTimeFormatter();
         return createStringFromDate(utcDateTime);
+    }
+
+    /**
+     * Returns zdtDateTime as a String
+     * 
+     * @return zdtDateTime as a String
+     */
+    public String getZDTDateTimeString()
+    {
+        return createStringFromDate(zdtDateTime);
     }
 
     /**
      * Checks to see if a GregorianCalendar contains a date newer than a specified
      * date.
      * 
+     * @param inDateTime
+     *            The GregorianCalendar being compared against.
      * @return Whether or not the GregorianCalendar is newer than inDateTime
      */
     public boolean newerThan(GregorianCalendar inDateTime)
@@ -355,6 +368,8 @@ public class Statistics extends Observation
      * Checks to see if a GregorianCalendar contains a date older than a specified
      * date.
      * 
+     * @param inDateTime
+     *            The GregorianCalendar being compared against.
      * @return Whether or not the GregorianCalendar is older than inDateTime
      */
     public boolean olderThan(GregorianCalendar inDateTime)
@@ -431,6 +446,8 @@ public class Statistics extends Observation
      * Checks to see if a GregorianCalendar contains a the same date as a specified
      * date.
      * 
+     * @param inDateTime
+     *            The GregorianCalendar being compared against.
      * @return Whether or not the GregorianCalendar is the same as inDateTime
      */
     public boolean sameAs(GregorianCalendar inDateTime)
@@ -452,6 +469,8 @@ public class Statistics extends Observation
     /**
      * Checks to see if a ZonedDateTime contains a date newer than a specified date.
      * 
+     * @param inDateTime
+     *            The ZonedDateTime being compared against.
      * @return Whether or not the ZonedDateTime is newer than inDateTime
      */
     public boolean newerThan(ZonedDateTime inDateTime)
@@ -527,6 +546,8 @@ public class Statistics extends Observation
     /**
      * Checks to see if a ZonedDateTime contains a date older than a specified date.
      * 
+     * @param inDateTime
+     *            The ZonedDateTime being compared against.
      * @return Whether or not the ZonedDateTime is older than inDateTime
      */
     public boolean olderThan(ZonedDateTime inDateTime)
@@ -603,6 +624,8 @@ public class Statistics extends Observation
      * Checks to see if a ZonedDateTime contains a the same date as a specified
      * date.
      * 
+     * @param inDateTime
+     *            The ZonedDateTime being compared against.
      * @return Whether or not the ZonedDateTime is the same as inDateTime
      */
     public boolean sameAs(ZonedDateTime inDateTime)
@@ -621,6 +644,12 @@ public class Statistics extends Observation
         return isSameAs;
     }
 
+    /**
+     * Returns a String that contains the station id and value of an Observation
+     * Separated by a space.
+     * 
+     * @return A Statistics as a String
+     */
     public String toString()
     {
         String out = "";
