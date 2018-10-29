@@ -353,6 +353,7 @@ public class Statistics extends Observation
         String out = "";
         
         out += this.getStid();
+        out += " ";
         out += this.getValue();
         
         return out;

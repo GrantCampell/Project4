@@ -24,6 +24,7 @@ public class Observation extends AbstractObservation
     {
         this.value = value;
         this.stid = stid;
+        this.isValid();
     }
 
     /**
@@ -41,16 +42,14 @@ public class Observation extends AbstractObservation
      */
     public boolean isValid()
     {
-        // Mesonet reports missing data as -999
-        // If the value in an Observation is -999, it's invalid and is added to a
-        // invalid counter
         if (getValue() == -999)
         {
+            super.valid = false;
             return false;
         }
         else
         {
-            // If the value is literally anything else, it is valid
+            super.valid = true;
             return true;
         }
     }
