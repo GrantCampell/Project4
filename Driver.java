@@ -3,7 +3,7 @@ import java.io.IOException;
 /**
  * 
  * @author Grant Campbell
- * @version 10/29/2018
+ * @version 10/28/2018
  * 
  *          Driver for the program. Takes in date and time to have data found
  *          for. Prints out the resulting statistics.

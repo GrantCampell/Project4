@@ -118,6 +118,18 @@ public class MapData
     /**
      * Uses the date and time to create a file name based on that data
      * 
+     * @param year
+     *            The year the data was recorded
+     * @param month
+     *            The month the data was recorded
+     * @param day
+     *            The day the data was recorded
+     * @param hour
+     *            The hour the data was recorded
+     * @param minute
+     *            The minute the data was recorded
+     * @param directory
+     *            The directory holding the recorded data
      * @return currentFileName The fileName of the requested data
      */
     public String createFileName(int year, int month, int day, int hour, int minute, String directory)
@@ -238,18 +250,15 @@ public class MapData
 
         BufferedReader br = new BufferedReader(new FileReader(fileName));
 
-        // String containing a line of data from the file
-        String strg;
-
         // Reads the header and stores it nowhere, moving the buffered reader to the
         // next line
-        strg = br.readLine();
+        br.readLine();
 
         // The second line is also useless so we store it nowhere and move on
-        strg = br.readLine();
+        br.readLine();
 
         // We also do not need the third line
-        strg = br.readLine();
+        br.readLine();
 
         // Creates an empty temporary string to store each line of the input while the
         // object is created

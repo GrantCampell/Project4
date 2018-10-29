@@ -16,6 +16,7 @@ public interface DateTimeComparable
      * than inDateTimeUTC.
      * 
      * @param inDateTimeUTC
+     *            The GregorianCalendar being compared against
      * @return boolean stating whether or not the reference variable is newer than
      *         the parameter.
      */
@@ -26,6 +27,7 @@ public interface DateTimeComparable
      * than inDateTimeUTC.
      * 
      * @param inDateTimeUTC
+     *            The GregorianCalendar being compared against
      * @return boolean stating whether or not the reference variable is older than
      *         the parameter.
      */
@@ -36,6 +38,7 @@ public interface DateTimeComparable
      * as inDateTimeUTC.
      * 
      * @param inDateTimeUTC
+     *            The GregorianCalendar being compared against
      * @return boolean stating whether or not the reference variable is the same as
      *         the parameter.
      */
@@ -46,6 +49,7 @@ public interface DateTimeComparable
      * inDateTimeUTC.
      * 
      * @param inDateTimeUTC
+     *            The ZonedDateTime being compared against
      * @return boolean stating whether or not the reference variable is newer than
      *         the parameter.
      */
@@ -56,6 +60,7 @@ public interface DateTimeComparable
      * inDateTimeUTC.
      * 
      * @param inDateTimeUTC
+     *            The ZonedDateTime being compared against
      * @return boolean stating whether or not the reference variable is older than
      *         the parameter.
      */
@@ -66,6 +71,7 @@ public interface DateTimeComparable
      * inDateTimeUTC.
      * 
      * @param inDateTimeUTC
+     *            The ZonedDateTime being compared against
      * @return boolean stating whether or not the reference variable is the same as
      *         the parameter.
      */
