@@ -21,13 +21,29 @@ import java.util.TreeMap;
  */
 public class MapData
 {
+    /**
+     * HashMap with a String key and an ArrayList value. Used to store data from the
+     * .mdf files.
+     */
     private HashMap<String, ArrayList<Observation>> dataCatalog;
 
+    /**
+     * EnumMap containing significant Stats for each parameter.
+     */
     private EnumMap<StatsType, TreeMap<String, Statistics>> statistics = new EnumMap<>(StatsType.class);
 
+    /**
+     * TreeMap containing the positions of each parameter on the file. Param name
+     * String is the key.
+     */
     private TreeMap<String, Integer> paramPositions = new TreeMap<>();
 
+    /**
+     * TreeMap that temporarily holds statistics as they are moved into the
+     * statistics EnumMap.
+     */
     TreeMap<String, Statistics> tempStatHolder = new TreeMap<>();
+
     /**
      * An int value of 10, that is the number of missing observations
      */
@@ -377,6 +393,9 @@ public class MapData
         dataCatalog = new HashMap<>();
     }
 
+    /**
+     * Calculates the statistics for each requested parameter.
+     */
     private void calculateStatistics()
     {
         calculateAllStatistics(dataCatalog.get(TAIR), TAIR);
