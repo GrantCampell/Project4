@@ -139,7 +139,17 @@ public class StatisticsTest
     @Test
     public void testSameAs()
     {
-        fail("Not yet implemented");
+        Assert.assertEquals(testStat.sameAs(testCal), true);
+        Assert.assertEquals(testStat.sameAs(testCal2), false);
+        Assert.assertEquals(testStat.sameAs(testCal3), false);
+        Assert.assertEquals(testStat.sameAs(testCal4), false);
+        Assert.assertEquals(testStat.sameAs(testCal5), false);
+        Assert.assertEquals(testStat.sameAs(testCal6), false);
+        Assert.assertEquals(testStat.sameAs(testCal7), false);
+        Assert.assertEquals(testStat.sameAs(testCal8), false);
+        Assert.assertEquals(testStat.sameAs(testCal9), false);
+        Assert.assertEquals(testStat.sameAs(testCal10), false);
+        Assert.assertEquals(testStat.sameAs(testCal11), false);
     }
 
     @Test
