@@ -4,13 +4,10 @@ import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
+import junit.framework.Assert;
+
 public class StatisticsTest
 {
-    /**
-     * A StatsType reference for the type Average
-     */
-    StatsType avg = StatsType.AVERAGE;
-
     /**
      * A GregorianCalendar to be used in tests
      */
@@ -69,7 +66,7 @@ public class StatisticsTest
     /**
      * A Statistics object to be used in tests
      */
-    Statistics testStat = new Statistics(10.0, "Mesonet", testCal, 100, avg);
+    Statistics testStat = new Statistics(10.0, "Mesonet", testCal, 100, StatsType.AVERAGE);
 
     @Test
     public void testStatisticsDoubleStringStringIntStatsType()
@@ -110,13 +107,33 @@ public class StatisticsTest
     @Test
     public void testNewerThan()
     {
-        fail("Not yet implemented");
+        Assert.assertEquals(testStat.newerThan(testCal), false);
+        Assert.assertEquals(testStat.newerThan(testCal2), true);
+        Assert.assertEquals(testStat.newerThan(testCal3), false);
+        Assert.assertEquals(testStat.newerThan(testCal4), true);
+        Assert.assertEquals(testStat.newerThan(testCal5), false);
+        Assert.assertEquals(testStat.newerThan(testCal6), true);
+        Assert.assertEquals(testStat.newerThan(testCal7), false);
+        Assert.assertEquals(testStat.newerThan(testCal8), true);
+        Assert.assertEquals(testStat.newerThan(testCal9), false);
+        Assert.assertEquals(testStat.newerThan(testCal10), false);
+        Assert.assertEquals(testStat.newerThan(testCal11), false);
     }
 
     @Test
     public void testOlderThan()
     {
-        fail("Not yet implemented");
+        Assert.assertEquals(testStat.olderThan(testCal), false);
+        Assert.assertEquals(testStat.olderThan(testCal2), false);
+        Assert.assertEquals(testStat.olderThan(testCal3), true);
+        Assert.assertEquals(testStat.olderThan(testCal4), false);
+        Assert.assertEquals(testStat.olderThan(testCal5), true);
+        Assert.assertEquals(testStat.olderThan(testCal6), false);
+        Assert.assertEquals(testStat.olderThan(testCal7), true);
+        Assert.assertEquals(testStat.olderThan(testCal8), false);
+        Assert.assertEquals(testStat.olderThan(testCal9), true);
+        Assert.assertEquals(testStat.olderThan(testCal10), true);
+        Assert.assertEquals(testStat.olderThan(testCal11), true);
     }
 
     @Test
