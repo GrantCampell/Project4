@@ -21,7 +21,6 @@ public class MapFrame extends JFrame
 {
     private static final long serialVersionUID = 1L;
 
-    JPanel menuPanel = new JPanel();
     JPanel sloganPanel = new JPanel();
     JPanel checkPanel = new JPanel();
     JPanel statsPanel = new JPanel();
@@ -61,7 +60,7 @@ public class MapFrame extends JFrame
 
         slogan.setText("Mesonet - We don't set records, we report them!");
 
-        // sets the layout grid for the GUI of dimension 4*5
+        // sets the layout grid for the GUI
         setLayout(new GridLayout(6, 0));
 
         // Buttons added to the stats button group
@@ -73,9 +72,6 @@ public class MapFrame extends JFrame
         file.add(load);
         file.add(exitFile);
         menu.add(file);
-
-        // menu bar added to menuPanel
-        menuPanel.add(menu);
 
         // Slogan added to sloganPanel
         sloganPanel.add(slogan);
@@ -101,7 +97,7 @@ public class MapFrame extends JFrame
         buttonsPanel.add(exit);
 
         // Adds the panels to the frame
-        add(menuPanel);
+        setJMenuBar(menu);
         add(sloganPanel);
         add(checkPanel);
         add(statsPanel);
