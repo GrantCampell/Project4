@@ -1,0 +1,67 @@
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+public class MapFrame extends JFrame
+{
+    private static final long serialVersionUID = 1L;
+
+    JPanel menuPanel = new JPanel();
+    JPanel sloganPanel = new JPanel();
+    JPanel checkPanel = new JPanel();
+    JPanel statsPanel = new JPanel();
+    JPanel infoPanel = new JPanel();
+
+    // TODO: This is where i'll deal with the menu bar
+    JMenuBar menu = new JMenuBar();
+
+    // The slogan text box
+    JTextField slogan = new JTextField();
+
+    JCheckBox=paramSelect=new JCheckBox("Parameter");
+
+    ButtonGroup stats = new ButtonGroup();
+
+    JRadioButton max = new JRadioButton("MAXIMUM");
+    JRadioButton min = new JRadioButton("MINIMUM");
+    JRadioButton avg = new JRadioButton("AVERAGE");
+
+    JButton calculate = new JButton("Calculate");
+    JButton exit = new JButton("Exit");
+
+    public MapFrame(String title)
+    {
+        super(title);
+
+        // Set Alignment of the JTextField and Jlabel
+
+        // sets the layout grid for the GUI of dimension 4*5
+        setLayout(new GridLayout(5, 0));
+
+        // Here we are adding elements into panels. The first panel has all elements
+        // added into it.
+
+        // Adds elements to the 2nd 3rd and 4th panel
+
+        // Adds the slider to the 0th panel
+
+        // Adds the panels to the frame
+
+        // Configuring of the frame
+        setSize(400, 400);
+        setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+}
