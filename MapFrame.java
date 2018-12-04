@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
@@ -29,7 +30,7 @@ public class MapFrame extends JFrame
     // The slogan text box
     JTextField slogan = new JTextField();
 
-    JCheckBox=paramSelect=new JCheckBox("Parameter");
+    JCheckBox paramSelect = new JCheckBox("Parameter");
 
     ButtonGroup stats = new ButtonGroup();
 
