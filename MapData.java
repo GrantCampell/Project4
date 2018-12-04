@@ -100,6 +100,12 @@ public class MapData
      * collection
      */
     private GregorianCalendar utcDateTime;
+    
+    ArrayList<Observation> sradData = new ArrayList<Observation>();
+    ArrayList<Observation> tairData = new ArrayList<Observation>();
+    ArrayList<Observation> ta9mData = new ArrayList<Observation>();
+    ArrayList<Observation> wspdData = new ArrayList<Observation>();
+    ArrayList<Observation> presData = new ArrayList<Observation>();
 
     /**
      * The constuctor for the MapData class. Takes in information about the file
@@ -279,11 +285,7 @@ public class MapData
         // Runs through the input file and reads each line into a player object
         // Counter will indicate the size the new array needs to be
         // Creates temp arrays to be stored in dataCatalog
-        ArrayList<Observation> sradData = new ArrayList<Observation>();
-        ArrayList<Observation> tairData = new ArrayList<Observation>();
-        ArrayList<Observation> ta9mData = new ArrayList<Observation>();
-        ArrayList<Observation> wspdData = new ArrayList<Observation>();
-        ArrayList<Observation> presData = new ArrayList<Observation>();
+        
         numberOfStations = 0;
         while ((temp = br.readLine()) != null)
         {
