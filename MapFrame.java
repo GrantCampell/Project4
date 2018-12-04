@@ -32,6 +32,14 @@ public class MapFrame extends JFrame
     JLabel slogan = new JLabel();
 
     JCheckBox paramSelect = new JCheckBox("Parameter");
+    
+    ButtonGroup paramCheck = new ButtonGroup();
+    
+    JRadioButton tair = new JRadioButton("TAIR");
+    JRadioButton ta9m = new JRadioButton("TA9M");
+    JRadioButton srad = new JRadioButton("SRAD");
+    JRadioButton wspd = new JRadioButton("WSPD");
+    JRadioButton pres = new JRadioButton("PRES");
 
     ButtonGroup stats = new ButtonGroup();
 
@@ -53,11 +61,23 @@ public class MapFrame extends JFrame
 
         // sets the layout grid for the GUI of dimension 4*5
         setLayout(new GridLayout(6, 0));
+        
+        paramCheck.add(tair);
+        paramCheck.add(ta9m);
+        paramCheck.add(srad);
+        paramCheck.add(wspd);
+        paramCheck.add(pres);
+        
 
         // Here we are adding elements into panels. The first panel has all elements
         // added into it.
         menuPanel.add(menu);
         sloganPanel.add(slogan);
+        checkPanel.add(tair);
+        checkPanel.add(ta9m);
+        checkPanel.add(srad);
+        checkPanel.add(wspd);
+        checkPanel.add(pres);
 
         // Adds elements to the 2nd 3rd and 4th panel
 
@@ -72,7 +92,7 @@ public class MapFrame extends JFrame
         add(buttonsPanel);
 
         // Configuring of the frame
-        setSize(1280, 720);
+        setSize(500, 500);
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
