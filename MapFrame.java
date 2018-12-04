@@ -14,6 +14,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -36,6 +37,7 @@ public class MapFrame extends JFrame
     // The slogan text box
     JLabel slogan = new JLabel();
 
+    // Check boxes for the parameters
     JCheckBox tair = new JCheckBox("TAIR");
     JCheckBox ta9m = new JCheckBox("TA9M");
     JCheckBox srad = new JCheckBox("SRAD");
@@ -51,6 +53,8 @@ public class MapFrame extends JFrame
     JButton calculate = new JButton("Calculate");
     JButton exit = new JButton("Exit");
 
+    JTextPane infoBox = new JTextPane();
+
     public MapFrame(String title)
     {
         super(title);
@@ -61,13 +65,13 @@ public class MapFrame extends JFrame
         slogan.setText("Mesonet - We don't set records, we report them!");
 
         // sets the layout grid for the GUI
-        setLayout(new GridLayout(6, 0));
+        setLayout(new GridLayout(5, 0));
 
         // Buttons added to the stats button group
         stats.add(max);
         stats.add(min);
         stats.add(avg);
-        
+
         // Adds menu items
         file.add(load);
         file.add(exitFile);
@@ -91,10 +95,12 @@ public class MapFrame extends JFrame
         statsPanel.add(avg);
         statsPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Statisitcs"),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        
-        //Adds buttons to the buttonsPanel
+
+        // Adds buttons to the buttonsPanel
         buttonsPanel.add(calculate);
         buttonsPanel.add(exit);
+
+        infoPanel.add(infoBox);
 
         // Adds the panels to the frame
         setJMenuBar(menu);
@@ -109,5 +115,21 @@ public class MapFrame extends JFrame
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        exit.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                System.exit(DO_NOTHING_ON_CLOSE);
+            }
+        });
+        
+        exitFile.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                System.exit(DO_NOTHING_ON_CLOSE);
+            }
+        });
     }
 }
