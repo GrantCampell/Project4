@@ -8,7 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -28,6 +30,9 @@ public class MapFrame extends JFrame
 
     // TODO: This is where i'll deal with the menu bar
     JMenuBar menu = new JMenuBar();
+    JMenu file = new JMenu("File");
+    JMenuItem load = new JMenuItem("Open Data File");
+    JMenuItem exitFile = new JMenuItem("Exit");
 
     // The slogan text box
     JLabel slogan = new JLabel();
@@ -63,6 +68,11 @@ public class MapFrame extends JFrame
         stats.add(max);
         stats.add(min);
         stats.add(avg);
+        
+        // Adds menu items
+        file.add(load);
+        file.add(exitFile);
+        menu.add(file);
 
         // menu bar added to menuPanel
         menuPanel.add(menu);
