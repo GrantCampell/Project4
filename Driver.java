@@ -57,6 +57,8 @@ public class Driver
          * Prints out the data summary.
          */
         System.out.println(mapData);
+        
+        new MapFrame("Oklahoma Mesonet");
 
     }
 
