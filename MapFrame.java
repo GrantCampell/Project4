@@ -23,12 +23,13 @@ public class MapFrame extends JFrame
     JPanel checkPanel = new JPanel();
     JPanel statsPanel = new JPanel();
     JPanel infoPanel = new JPanel();
+    JPanel buttonsPanel = new JPanel();
 
     // TODO: This is where i'll deal with the menu bar
     JMenuBar menu = new JMenuBar();
 
     // The slogan text box
-    JTextField slogan = new JTextField();
+    JLabel slogan = new JLabel();
 
     JCheckBox paramSelect = new JCheckBox("Parameter");
 
@@ -46,21 +47,32 @@ public class MapFrame extends JFrame
         super(title);
 
         // Set Alignment of the JTextField and Jlabel
+        slogan.setHorizontalAlignment(JLabel.LEFT);
+        
+        slogan.setText("Mesonet - We don't set records, we report them!");
 
         // sets the layout grid for the GUI of dimension 4*5
-        setLayout(new GridLayout(5, 0));
+        setLayout(new GridLayout(6, 0));
 
         // Here we are adding elements into panels. The first panel has all elements
         // added into it.
+        menuPanel.add(menu);
+        sloganPanel.add(slogan);
 
         // Adds elements to the 2nd 3rd and 4th panel
 
         // Adds the slider to the 0th panel
 
         // Adds the panels to the frame
+        add(menuPanel);
+        add(sloganPanel);
+        add(checkPanel);
+        add(statsPanel);
+        add(infoPanel);
+        add(buttonsPanel);
 
         // Configuring of the frame
-        setSize(400, 400);
+        setSize(1280, 720);
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
