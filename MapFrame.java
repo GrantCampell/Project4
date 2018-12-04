@@ -57,6 +57,10 @@ public class MapFrame extends JFrame
 
         // sets the layout grid for the GUI of dimension 4*5
         setLayout(new GridLayout(6, 0));
+        
+        stats.add(max);
+        stats.add(min);
+        stats.add(avg);
 
         // Here we are adding elements into panels. The first panel has all elements
         // added into it.
@@ -67,6 +71,9 @@ public class MapFrame extends JFrame
         checkPanel.add(srad);
         checkPanel.add(wspd);
         checkPanel.add(pres);
+        statsPanel.add(max);
+        statsPanel.add(min);
+        statsPanel.add(avg);
 
         // Adds elements to the 2nd 3rd and 4th panel
 
