@@ -52,11 +52,6 @@ public class Driver
          * Entry point of the program. Pushes the rest of the instructions.
          */
         mapData.parseFile();
-
-        /**
-         * Prints out the data summary.
-         */
-        System.out.println(mapData);
         
         new MapFrame("Oklahoma Mesonet");
 
