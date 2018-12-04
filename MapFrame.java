@@ -2,6 +2,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -30,7 +31,7 @@ public class MapFrame extends JFrame
 
     // The slogan text box
     JLabel slogan = new JLabel();
-    
+
     JCheckBox tair = new JCheckBox("TAIR");
     JCheckBox ta9m = new JCheckBox("TA9M");
     JCheckBox srad = new JCheckBox("SRAD");
@@ -52,32 +53,38 @@ public class MapFrame extends JFrame
 
         // Set Alignment of the JTextField and Jlabel
         slogan.setHorizontalAlignment(JLabel.LEFT);
-        
+
         slogan.setText("Mesonet - We don't set records, we report them!");
 
         // sets the layout grid for the GUI of dimension 4*5
         setLayout(new GridLayout(6, 0));
-        
+
+        // Buttons added to the stats button group
         stats.add(max);
         stats.add(min);
         stats.add(avg);
 
-        // Here we are adding elements into panels. The first panel has all elements
-        // added into it.
+        // menu bar added to menuPanel
         menuPanel.add(menu);
+
+        // Slogan added to sloganPanel
         sloganPanel.add(slogan);
+
+        // Check boxes added to checkPanel
         checkPanel.add(tair);
         checkPanel.add(ta9m);
         checkPanel.add(srad);
         checkPanel.add(wspd);
         checkPanel.add(pres);
+        checkPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Parameter"),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+
+        // Buttons added to statsPanel
         statsPanel.add(max);
         statsPanel.add(min);
         statsPanel.add(avg);
-
-        // Adds elements to the 2nd 3rd and 4th panel
-
-        // Adds the slider to the 0th panel
+        statsPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Statisitcs"),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
         // Adds the panels to the frame
         add(menuPanel);
