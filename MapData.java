@@ -68,6 +68,11 @@ public class MapData
      * A final String containing the stat name "SRAD"
      */
     private static final String SRAD = "SRAD";
+    
+    /**
+     * A final String containing the stat name "SRAD"
+     */
+    private static final String WSPD = "WSPD";
 
     /**
      * A final String containing the stat name "STID"
@@ -246,6 +251,7 @@ public class MapData
         parseParamHeader(TA9M);
         parseParamHeader(SRAD);
         parseParamHeader(TAIR);
+        parseParamHeader(WSPD);
         parseParamHeader(STID);
 
         BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -270,6 +276,7 @@ public class MapData
         ArrayList<Observation> sradData = new ArrayList<Observation>();
         ArrayList<Observation> tairData = new ArrayList<Observation>();
         ArrayList<Observation> ta9mData = new ArrayList<Observation>();
+        ArrayList<Observation> wspdData = new ArrayList<Observation>();
         numberOfStations = 0;
         while ((temp = br.readLine()) != null)
         {
@@ -282,6 +289,8 @@ public class MapData
                     tempString[paramPositions.get(STID)]));
             ta9mData.add(new Observation(Double.parseDouble(tempString[paramPositions.get(TA9M)]),
                     tempString[paramPositions.get(STID)]));
+            wspdData.add(new Observation(Double.parseDouble(tempString[paramPositions.get(WSPD)]),
+                    tempString[paramPositions.get(STID)]));
 
             ++numberOfStations;
         }
@@ -289,6 +298,7 @@ public class MapData
         dataCatalog.put(TAIR, tairData);
         dataCatalog.put(TA9M, ta9mData);
         dataCatalog.put(SRAD, sradData);
+        dataCatalog.put(WSPD, wspdData);
 
         br.close();
 
@@ -410,6 +420,7 @@ public class MapData
         calculateAllStatistics(dataCatalog.get(TAIR), TAIR);
         calculateAllStatistics(dataCatalog.get(TA9M), TA9M);
         calculateAllStatistics(dataCatalog.get(SRAD), SRAD);
+        calculateAllStatistics(dataCatalog.get(WSPD), WSPD);
     }
 
     /**
