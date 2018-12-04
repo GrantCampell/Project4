@@ -85,6 +85,10 @@ public class MapFrame extends JFrame
         statsPanel.add(avg);
         statsPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Statisitcs"),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        
+        //Adds buttons to the buttonsPanel
+        buttonsPanel.add(calculate);
+        buttonsPanel.add(exit);
 
         // Adds the panels to the frame
         add(menuPanel);
