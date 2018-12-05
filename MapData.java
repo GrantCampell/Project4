@@ -203,11 +203,11 @@ public class MapData
         fileName = filename;
         String[] splitFile = filename.split("\\\\");
         String temp = splitFile[splitFile.length - 1];
-        int year = Integer.parseInt(temp.substring(0, 3));
-        int month = Integer.parseInt(temp.substring(4, 5));
-        int day = Integer.parseInt(temp.substring(6, 7));
-        int hour = Integer.parseInt(temp.substring(8, 9));
-        int minute = Integer.parseInt(temp.substring(10, 11));
+        int year = Integer.parseInt(temp.substring(0, 4));
+        int month = Integer.parseInt(temp.substring(4, 6));
+        int day = Integer.parseInt(temp.substring(6, 8));
+        int hour = Integer.parseInt(temp.substring(8, 10));
+        int minute = Integer.parseInt(temp.substring(10, 12));
 
         utcDateTime = new GregorianCalendar(year, month, day, hour, minute);
         prepareDataCatalog();
