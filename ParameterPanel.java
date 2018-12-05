@@ -16,7 +16,38 @@ public class ParameterPanel extends JPanel
     JCheckBox srad = new JCheckBox("SRAD");
     JCheckBox wspd = new JCheckBox("WSPD");
     JCheckBox pres = new JCheckBox("PRES");
-    
+
+    boolean tairSelect;
+    boolean ta9mSelect;
+    boolean sradSelect;
+    boolean wspdSelect;
+    boolean presSelect;
+
+    public boolean getTairSelect()
+    {
+        return tairSelect;
+    }
+
+    public boolean getTa9mSelect()
+    {
+        return ta9mSelect;
+    }
+
+    public boolean getSradSelect()
+    {
+        return sradSelect;
+    }
+
+    public boolean getWspdSelect()
+    {
+        return wspdSelect;
+    }
+
+    public boolean getPresSelect()
+    {
+        return presSelect;
+    }
+
     public ParameterPanel()
     {
         add(tair);
@@ -26,7 +57,7 @@ public class ParameterPanel extends JPanel
         add(pres);
         setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Parameter"),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        
+
         tair.addItemListener(new ItemListener()
         {
             public void itemStateChanged(ItemEvent e)
@@ -41,7 +72,7 @@ public class ParameterPanel extends JPanel
                 }
             }
         });
-        
+
         ta9m.addItemListener(new ItemListener()
         {
             public void itemStateChanged(ItemEvent e)
@@ -56,7 +87,7 @@ public class ParameterPanel extends JPanel
                 }
             }
         });
-        
+
         srad.addItemListener(new ItemListener()
         {
             public void itemStateChanged(ItemEvent e)
@@ -71,7 +102,7 @@ public class ParameterPanel extends JPanel
                 }
             }
         });
-        
+
         wspd.addItemListener(new ItemListener()
         {
             public void itemStateChanged(ItemEvent e)
@@ -86,7 +117,7 @@ public class ParameterPanel extends JPanel
                 }
             }
         });
-        
+
         pres.addItemListener(new ItemListener()
         {
             public void itemStateChanged(ItemEvent e)

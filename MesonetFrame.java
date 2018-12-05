@@ -91,13 +91,6 @@ public class MesonetFrame extends JFrame
 
     MapData mapData;
 
-    String statSelect;
-    boolean tairSelect = false;
-    boolean ta9mSelect = false;
-    boolean sradSelect = false;
-    boolean wspdSelect = false;
-    boolean presSelect = false;
-
     Statistics tairMin;
     Statistics tairMax;
     Statistics tairAvg;
@@ -162,7 +155,7 @@ public class MesonetFrame extends JFrame
             {
                 if (statsPanel.max.isSelected())
                 {
-                    if (tairSelect)
+                    if (parmPanel.getTairSelect())
                     {
                         Statistics tempStat = tairMax;
 
@@ -171,7 +164,7 @@ public class MesonetFrame extends JFrame
                                 tairMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (ta9mSelect)
+                    if (parmPanel.getTa9mSelect())
                     {
                         Statistics tempStat = ta9mMax;
 
@@ -180,7 +173,7 @@ public class MesonetFrame extends JFrame
                                 ta9mMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (sradSelect)
+                    if (parmPanel.getSradSelect())
                     {
                         Statistics tempStat = sradMax;
 
@@ -189,7 +182,7 @@ public class MesonetFrame extends JFrame
                                 sradMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (wspdSelect)
+                    if (parmPanel.getWspdSelect())
                     {
                         Statistics tempStat = wspdMax;
 
@@ -198,7 +191,7 @@ public class MesonetFrame extends JFrame
                                 wspdMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (presSelect)
+                    if (parmPanel.getPresSelect())
                     {
                         Statistics tempStat = presMax;
 
@@ -209,7 +202,7 @@ public class MesonetFrame extends JFrame
                 }
                 else if (statsPanel.min.isSelected())
                 {
-                    if (tairSelect)
+                    if (parmPanel.getTairSelect())
                     {
                         Statistics tempStat = tairMin;
 
@@ -218,7 +211,7 @@ public class MesonetFrame extends JFrame
                                 tairMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (ta9mSelect)
+                    if (parmPanel.getTa9mSelect())
                     {
                         Statistics tempStat = ta9mMin;
 
@@ -227,7 +220,7 @@ public class MesonetFrame extends JFrame
                                 ta9mMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (sradSelect)
+                    if (parmPanel.getSradSelect())
                     {
                         Statistics tempStat = sradMin;
 
@@ -236,7 +229,7 @@ public class MesonetFrame extends JFrame
                                 sradMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (wspdSelect)
+                    if (parmPanel.getWspdSelect())
                     {
                         Statistics tempStat = wspdMin;
 
@@ -245,7 +238,7 @@ public class MesonetFrame extends JFrame
                                 wspdMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (presSelect)
+                    if (parmPanel.getPresSelect())
                     {
                         Statistics tempStat = presMin;
 
@@ -256,7 +249,7 @@ public class MesonetFrame extends JFrame
                 }
                 else if (statsPanel.avg.isSelected())
                 {
-                    if (tairSelect)
+                    if (parmPanel.getTairSelect())
                     {
                         Statistics tempStat = tairAvg;
 
@@ -265,7 +258,7 @@ public class MesonetFrame extends JFrame
                                 tairAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (ta9mSelect)
+                    if (parmPanel.getTa9mSelect())
                     {
                         Statistics tempStat = ta9mAvg;
 
@@ -274,7 +267,7 @@ public class MesonetFrame extends JFrame
                                 ta9mAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (sradSelect)
+                    if (parmPanel.getSradSelect())
                     {
                         Statistics tempStat = sradAvg;
 
@@ -283,7 +276,7 @@ public class MesonetFrame extends JFrame
                                 sradAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (wspdSelect)
+                    if (parmPanel.getWspdSelect())
                     {
                         Statistics tempStat = wspdAvg;
 
@@ -292,7 +285,7 @@ public class MesonetFrame extends JFrame
                                 wspdAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (presSelect)
+                    if (parmPanel.getPresSelect())
                     {
                         Statistics tempStat = presAvg;
 
