@@ -157,12 +157,10 @@ public class MapFrame extends JFrame
                 if (e.getStateChange() == ItemEvent.SELECTED)
                 {
                     tairSelect = true;
-                    System.out.println(tairSelect);
                 }
                 else
                 {
                     tairSelect = false;
-                    System.out.println(tairSelect);
                 }
             }
         });
@@ -174,12 +172,10 @@ public class MapFrame extends JFrame
                 if (e.getStateChange() == ItemEvent.SELECTED)
                 {
                     ta9mSelect = true;
-                    System.out.println(ta9mSelect);
                 }
                 else
                 {
                     ta9mSelect = false;
-                    System.out.println(ta9mSelect);
                 }
             }
         });
@@ -191,12 +187,10 @@ public class MapFrame extends JFrame
                 if (e.getStateChange() == ItemEvent.SELECTED)
                 {
                     sradSelect = true;
-                    System.out.println(sradSelect);
                 }
                 else
                 {
                     sradSelect = false;
-                    System.out.println(sradSelect);
                 }
             }
         });
@@ -208,12 +202,10 @@ public class MapFrame extends JFrame
                 if (e.getStateChange() == ItemEvent.SELECTED)
                 {
                     wspdSelect = true;
-                    System.out.println(wspdSelect);
                 }
                 else
                 {
                     wspdSelect = false;
-                    System.out.println(wspdSelect);
                 }
             }
         });
@@ -225,12 +217,10 @@ public class MapFrame extends JFrame
                 if (e.getStateChange() == ItemEvent.SELECTED)
                 {
                     presSelect = true;
-                    System.out.println(presSelect);
                 }
                 else
                 {
                     presSelect = false;
-                    System.out.println(presSelect);
                 }
             }
         });
@@ -263,10 +253,9 @@ public class MapFrame extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                JFileChooser chooser = new JFileChooser();
+                JFileChooser chooser = new JFileChooser("data");
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("MDF Text Files", "mdf");
                 chooser.setFileFilter(filter);
-                chooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/data"));
                 chooser.showOpenDialog(getParent());
                 String dataIn = chooser.getSelectedFile().toString();
 
@@ -287,7 +276,124 @@ public class MapFrame extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                // TODO: This
+                if (statSelect.equalsIgnoreCase("max"))
+                {
+                    if (tairSelect)
+                    {
+                        Statistics tempStat = mapData.getTairMax();
+                        Object[] tempTair = { tempStat.getStid(), "TAIR", "MAXIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        
+                        Object[][] tempArray = new Object[rowData.length + 1][];
+                        for(int i = 0; i < rowData.length; ++i)
+                        {
+                            tempArray[i] = rowData[i];
+                        }
+                        tempArray[tempArray.length] = tempTair;
+                    }
+
+                    if (ta9mSelect)
+                    {
+                        Statistics tempStat = mapData.getTa9mMax();
+                        Object[] tempTa9m = { tempStat.getStid(), "TA9M", "MAXIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+
+                    if (sradSelect)
+                    {
+                        Statistics tempStat = mapData.getSradMax();
+                        Object[] tempSrad = { tempStat.getStid(), "SRAD", "MAXIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+
+                    if (wspdSelect)
+                    {
+                        Statistics tempStat = mapData.getWspdMax();
+                        Object[] tempWspd = { tempStat.getStid(), "WSPD", "MAXIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+
+                    if (presSelect)
+                    {
+                        Statistics tempStat = mapData.getPresMax();
+                        Object[] tempPres = { tempStat.getStid(), "PRES", "MAXIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+                }
+                else if (statSelect.equalsIgnoreCase("min"))
+                {
+                    if (tairSelect)
+                    {
+                        Statistics tempStat = mapData.getTairMin();
+                        Object[] tempTair = { tempStat.getStid(), "TAIR", "MINIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+
+                    if (ta9mSelect)
+                    {
+                        Statistics tempStat = mapData.getTa9mMin();
+                        Object[] tempTa9m = { tempStat.getStid(), "TA9M", "MINIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+
+                    if (sradSelect)
+                    {
+                        Statistics tempStat = mapData.getSradMin();
+                        Object[] tempSrad = { tempStat.getStid(), "SRAD", "MINIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+
+                    if (wspdSelect)
+                    {
+                        Statistics tempStat = mapData.getWspdMin();
+                        Object[] tempWspd = { tempStat.getStid(), "WSPD", "MINIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+
+                    if (presSelect)
+                    {
+                        Statistics tempStat = mapData.getPresMin();
+                        Object[] tempPres = { tempStat.getStid(), "PRES", "MINIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+                }
+                else
+                {
+                    if (tairSelect)
+                    {
+                        Statistics tempStat = mapData.getTairAvg();
+                        Object[] tempTair = { tempStat.getStid(), "TAIR", "AVERAGE", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+
+                    if (ta9mSelect)
+                    {
+                        Statistics tempStat = mapData.getTa9mAvg();
+                        Object[] tempTa9m = { tempStat.getStid(), "TA9M", "AVERAGE", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+
+                    if (sradSelect)
+                    {
+                        Statistics tempStat = mapData.getSradAvg();
+                        Object[] tempSrad = { tempStat.getStid(), "SRAD", "AVERAGE", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+
+                    if (wspdSelect)
+                    {
+                        Statistics tempStat = mapData.getWspdAvg();
+                        Object[] tempWspd = { tempStat.getStid(), "WSPD", "AVERAGE", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+
+                    if (presSelect)
+                    {
+                        Statistics tempStat = mapData.getPresAvg();
+                        Object[] tempPres = { tempStat.getStid(), "PRES", "AVERAGE", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                    }
+                }
             }
         });
     }
