@@ -107,29 +107,95 @@ public class MapData
     ArrayList<Observation> wspdData = new ArrayList<Observation>();
     ArrayList<Observation> presData = new ArrayList<Observation>();
 
-    public ArrayList<Observation> getSradData()
+    Statistics tairMin;
+    Statistics tairMax;
+    Statistics tairAvg;
+    Statistics ta9mMin;
+    Statistics ta9mMax;
+    Statistics ta9mAvg;
+    Statistics sradMin;
+    Statistics sradMax;
+    Statistics sradAvg;
+    Statistics wspdMin;
+    Statistics wspdMax;
+    Statistics wspdAvg;
+    Statistics presMin;
+    Statistics presMax;
+    Statistics presAvg;
+
+    public Statistics getTairMin()
     {
-        return sradData;
+        return tairMin;
     }
 
-    public ArrayList<Observation> getTairData()
+    public Statistics getTairMax()
     {
-        return tairData;
+        return tairMax;
     }
 
-    public ArrayList<Observation> getTa9mData()
+    public Statistics getTairAvg()
     {
-        return ta9mData;
+        return tairAvg;
     }
 
-    public ArrayList<Observation> getWspdData()
+    public Statistics getTa9mMin()
     {
-        return wspdData;
+        return ta9mMin;
     }
 
-    public ArrayList<Observation> getPresData()
+    public Statistics getTa9mMax()
     {
-        return presData;
+        return ta9mMax;
+    }
+
+    public Statistics getTa9mAvg()
+    {
+        return ta9mAvg;
+    }
+
+    public Statistics getSradMin()
+    {
+        return sradMin;
+    }
+
+    public Statistics getSradMax()
+    {
+        return sradMax;
+    }
+
+    public Statistics getSradAvg()
+    {
+        return sradAvg;
+    }
+
+    public Statistics getWspdMin()
+    {
+        return wspdMin;
+    }
+
+    public Statistics getWspdMax()
+    {
+        return wspdMax;
+    }
+
+    public Statistics getWspdAvg()
+    {
+        return wspdAvg;
+    }
+
+    public Statistics getPresMin()
+    {
+        return presMin;
+    }
+
+    public Statistics getPresMax()
+    {
+        return presMax;
+    }
+
+    public Statistics getPresAvg()
+    {
+        return presAvg;
     }
 
     public MapData(String filename)
@@ -444,6 +510,37 @@ public class MapData
             tempStatHolder.put(four, statTotal);
 
             statistics.put(StatsType.TOTAL, tempStatHolder);
+        }
+
+        if (inData.equals(tairData))
+        {
+            tairMin = statMin;
+            tairMax = statMax;
+            tairAvg = statAverage;
+        }
+        else if (inData.equals(ta9mData))
+        {
+            ta9mMin = statMin;
+            ta9mMax = statMax;
+            ta9mAvg = statAverage;
+        }
+        else if (inData.equals(sradData))
+        {
+            sradMin = statMin;
+            sradMax = statMax;
+            sradAvg = statAverage;
+        }
+        else if (inData.equals(wspdData))
+        {
+            wspdMin = statMin;
+            wspdMax = statMax;
+            wspdAvg = statAverage;
+        }
+        else if (inData.equals(presData))
+        {
+            presMin = statMin;
+            presMax = statMax;
+            presAvg = statAverage;
         }
     }
 
