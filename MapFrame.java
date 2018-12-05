@@ -35,6 +35,22 @@ public class MapFrame extends JFrame
     boolean sradSelect = false;
     boolean wspdSelect = false;
     boolean presSelect = false;
+    
+    Statistics tairMin;
+    Statistics tairMax;
+    Statistics tairAvg;
+    Statistics ta9mMin;
+    Statistics ta9mMax;
+    Statistics ta9mAvg;
+    Statistics sradMin;
+    Statistics sradMax;
+    Statistics sradAvg;
+    Statistics wspdMin;
+    Statistics wspdMax;
+    Statistics wspdAvg;
+    Statistics presMin;
+    Statistics presMax;
+    Statistics presAvg;
 
     JPanel sloganPanel = new JPanel();
     JPanel checkPanel = new JPanel();
@@ -258,8 +274,8 @@ public class MapFrame extends JFrame
                 chooser.setFileFilter(filter);
                 chooser.showOpenDialog(getParent());
                 String dataIn = chooser.getSelectedFile().toString();
+                MapData mapData = new MapData(dataIn);
 
-                mapData = new MapData(dataIn);
                 try
                 {
                     mapData.parseFile();
@@ -269,27 +285,43 @@ public class MapFrame extends JFrame
                     // Auto-generated catch block
                     e1.printStackTrace();
                 }
+                
+                tairMin = mapData.getTairMin();
+                tairMax = mapData.getTairMax();
+                tairAvg = mapData.getTairAvg();
+                ta9mMin = mapData.getTa9mMin();
+                ta9mMax = mapData.getTa9mMax();
+                ta9mAvg = mapData.getTa9mAvg();
+                sradMin = mapData.getSradMin();
+                sradMax = mapData.getSradMax();
+                sradAvg = mapData.getSradAvg();
+                wspdMin = mapData.getWspdMin();
+                wspdMax = mapData.getWspdMax();
+                wspdAvg = mapData.getWspdAvg();
+                presMin = mapData.getPresMin();
+                presMax = mapData.getPresMax();
+                presAvg = mapData.getPresAvg();
             }
         });
 
         calculate.addActionListener(new ActionListener()
-        {
+        {   
             public void actionPerformed(ActionEvent e)
             {
                 if (statSelect.equalsIgnoreCase("max"))
                 {
                     if (tairSelect)
                     {
-                        Statistics tempStat = mapData.getTairMax();
+                        Statistics tempStat = tairMax;
                         Object[] tempTair = { tempStat.getStid(), "TAIR", "MAXIMUM", tempStat.getValue(),
                                 "REPORING STATIONS", tempStat.getUTCDateTimeString() };
-                        
+
                         Object[][] tempArray = new Object[rowData.length + 1][];
-                        for(int i = 0; i < rowData.length; ++i)
+                        for (int i = 0; i < rowData.length; ++i)
                         {
                             tempArray[i] = rowData[i];
                         }
-                        tempArray[tempArray.length] = tempTair;
+                        tempArray[tempArray.length - 1] = tempTair;
                     }
 
                     if (ta9mSelect)

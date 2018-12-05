@@ -201,6 +201,15 @@ public class MapData
     public MapData(String filename)
     {
         fileName = filename;
+        String[] splitFile = filename.split("\\\\");
+        String temp = splitFile[splitFile.length - 1];
+        int year = Integer.parseInt(temp.substring(0, 3));
+        int month = Integer.parseInt(temp.substring(4, 5));
+        int day = Integer.parseInt(temp.substring(6, 7));
+        int hour = Integer.parseInt(temp.substring(8, 9));
+        int minute = Integer.parseInt(temp.substring(10, 11));
+
+        utcDateTime = new GregorianCalendar(year, month, day, hour, minute);
         prepareDataCatalog();
     }
 
@@ -517,6 +526,7 @@ public class MapData
             tairMin = statMin;
             tairMax = statMax;
             tairAvg = statAverage;
+
         }
         else if (inData.equals(ta9mData))
         {
