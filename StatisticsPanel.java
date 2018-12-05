@@ -10,9 +10,12 @@ public class StatisticsPanel extends JPanel
     JRadioButton max = new JRadioButton("MAXIMUM");
     JRadioButton min = new JRadioButton("MINIMUM");
     JRadioButton avg = new JRadioButton("AVERAGE");
-    
+
     public StatisticsPanel()
     {
+        stats.add(max);
+        stats.add(min);
+        stats.add(avg);
         add(max);
         add(min);
         add(avg);
