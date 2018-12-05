@@ -22,6 +22,8 @@ public class MapFrame extends JFrame
 {
     private static final long serialVersionUID = 1L;
 
+    MapData mapData;
+
     JPanel sloganPanel = new JPanel();
     JPanel checkPanel = new JPanel();
     JPanel statsPanel = new JPanel();
@@ -148,6 +150,8 @@ public class MapFrame extends JFrame
                 chooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/data"));
                 chooser.showOpenDialog(getParent());
                 String dataIn = chooser.getSelectedFile().toString();
+
+                mapData = new MapData(dataIn);
             }
         });
     }
