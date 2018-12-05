@@ -145,7 +145,7 @@ public class MapFrame extends JFrame
                 JFileChooser chooser = new JFileChooser();
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("MDF Text Files", "mdf");
                 chooser.setFileFilter(filter);
-                chooser.setCurrentDirectory(new File("C:/Users/Grant Campbell/Documents/Programming/Project4/data"));
+                chooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/data"));
                 chooser.showOpenDialog(getParent());
                 String dataIn = chooser.getSelectedFile().toString();
             }
