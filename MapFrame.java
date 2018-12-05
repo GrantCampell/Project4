@@ -2,6 +2,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -140,6 +141,38 @@ public class MapFrame extends JFrame
             }
         });
 
+        ta9m.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                // TODO: Finish this
+            }
+        });
+
+        srad.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                // TODO: Finish this
+            }
+        });
+
+        wspd.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                // TODO: Finish this
+            }
+        });
+
+        pres.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                // TODO: Finish this
+            }
+        });
+
         load.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -152,6 +185,17 @@ public class MapFrame extends JFrame
                 String dataIn = chooser.getSelectedFile().toString();
 
                 mapData = new MapData(dataIn);
+                try
+                {
+                    mapData.parseFile();
+                }
+                catch (IOException e1)
+                {
+                    // Auto-generated catch block
+                    e1.printStackTrace();
+                }
+
+                System.out.println(mapData.getTairData().toString());
             }
         });
     }
