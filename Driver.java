@@ -12,47 +12,7 @@ public class Driver
 {
 
     public static void main(String[] args) throws IOException
-    {
-        /**
-         * The year to be tested
-         */
-        final int YEAR = 2018;
-
-        /**
-         * The month to be tested
-         */
-        final int MONTH = 8;
-
-        /**
-         * The day to be tested
-         */
-        final int DAY = 1;
-
-        /**
-         * The hour to be tested
-         */
-        final int HOUR = 7;
-
-        /**
-         * The minute to be tested
-         */
-        final int MINUTE = 00;
-
-        /**
-         * The directory the data is found in
-         */
-        final String directory = "data";
-
-        /**
-         * Creates the MapData for the data
-         */
-        MapData mapData = new MapData(YEAR, MONTH, DAY, HOUR, MINUTE, directory);
-
-        /**
-         * Entry point of the program. Pushes the rest of the instructions.
-         */
-        mapData.parseFile();
-        
+    {   
         new MapFrame("Oklahoma Mesonet");
 
     }
