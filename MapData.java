@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -101,103 +102,263 @@ public class MapData
      */
     private GregorianCalendar utcDateTime;
 
+    /**
+     * An ArrayList that stores solar radiation data
+     */
     ArrayList<Observation> sradData = new ArrayList<Observation>();
+
+    /**
+     * An ArrayList that stores air temperature data
+     */
     ArrayList<Observation> tairData = new ArrayList<Observation>();
+
+    /**
+     * An ArrayList that stores air temperature data from 9 meters
+     */
     ArrayList<Observation> ta9mData = new ArrayList<Observation>();
+
+    /**
+     * An ArrayList that stores wind speed data
+     */
     ArrayList<Observation> wspdData = new ArrayList<Observation>();
+
+    /**
+     * An ArrayList that stores atmospheric pressure data
+     */
     ArrayList<Observation> presData = new ArrayList<Observation>();
 
+    /**
+     * Statistics containing the minimum tair value and related information
+     */
     Statistics tairMin;
+
+    /**
+     * Statistics containing the maximum tair value and related information
+     */
     Statistics tairMax;
+
+    /**
+     * Statistics containing the average tair value and related information
+     */
     Statistics tairAvg;
+
+    /**
+     * Statistics containing the minimum ta9m value and related information
+     */
     Statistics ta9mMin;
+
+    /**
+     * Statistics containing the maximum ta9m value and related information
+     */
     Statistics ta9mMax;
+
+    /**
+     * Statistics containing the average ta9m value and related information
+     */
     Statistics ta9mAvg;
+
+    /**
+     * Statistics containing the minimum srad value and related information
+     */
     Statistics sradMin;
+
+    /**
+     * Statistics containing the maximum srad value and related information
+     */
     Statistics sradMax;
+
+    /**
+     * Statistics containing the average srad value and related information
+     */
     Statistics sradAvg;
+
+    /**
+     * Statistics containing the minimum wspd value and related information
+     */
     Statistics wspdMin;
+
+    /**
+     * Statistics containing the maximum wspd value and related information
+     */
     Statistics wspdMax;
+
+    /**
+     * Statistics containing the average wspd value and related information
+     */
     Statistics wspdAvg;
+
+    /**
+     * Statistics containing the minimum pres value and related information
+     */
     Statistics presMin;
+
+    /**
+     * Statistics containing the maximum pres value and related information
+     */
     Statistics presMax;
+
+    /**
+     * Statistics containing the average pres value and related information
+     */
     Statistics presAvg;
 
+    /**
+     * Returns the tairMin Statistics object
+     * 
+     * @return tairMin
+     */
     public Statistics getTairMin()
     {
         return tairMin;
     }
 
+    /**
+     * Returns the tairMax Statistics object
+     * 
+     * @return tairMax
+     */
     public Statistics getTairMax()
     {
         return tairMax;
     }
 
+    /**
+     * Returns the tairAvg Statistics object
+     * 
+     * @return tairAvg
+     */
     public Statistics getTairAvg()
     {
         return tairAvg;
     }
 
+    /**
+     * Returns the ta9mMin Statistics object
+     * 
+     * @return ta9mMin
+     */
     public Statistics getTa9mMin()
     {
         return ta9mMin;
     }
 
+    /**
+     * Returns the ta9mMax Statistics object
+     * 
+     * @return ta9mMax
+     */
     public Statistics getTa9mMax()
     {
         return ta9mMax;
     }
 
+    /**
+     * Returns the ta9mAvg Statistics object
+     * 
+     * @return ta9mAvg
+     */
     public Statistics getTa9mAvg()
     {
         return ta9mAvg;
     }
 
+    /**
+     * Returns the sradMin Statistics object
+     * 
+     * @return sradMin
+     */
     public Statistics getSradMin()
     {
         return sradMin;
     }
 
+    /**
+     * Returns the sradMax Statistics object
+     * 
+     * @return sradMax
+     */
     public Statistics getSradMax()
     {
         return sradMax;
     }
 
+    /**
+     * Returns the sradAvg Statistics object
+     * 
+     * @return sradAvg
+     */
     public Statistics getSradAvg()
     {
         return sradAvg;
     }
 
+    /**
+     * Returns the wspdMin Statistics object
+     * 
+     * @return wspdMin
+     */
     public Statistics getWspdMin()
     {
         return wspdMin;
     }
 
+    /**
+     * Returns the wspdMax Statistics object
+     * 
+     * @return wspdMax
+     */
     public Statistics getWspdMax()
     {
         return wspdMax;
     }
 
+    /**
+     * Returns the wspdAvg Statistics object
+     * 
+     * @return wspdAvg
+     */
     public Statistics getWspdAvg()
     {
         return wspdAvg;
     }
 
+    /**
+     * Returns the presMin Statistics object
+     * 
+     * @return presMin
+     */
     public Statistics getPresMin()
     {
         return presMin;
     }
 
+    /**
+     * Returns the presMax Statistics object
+     * 
+     * @return presMax
+     */
     public Statistics getPresMax()
     {
         return presMax;
     }
 
+    /**
+     * Returns the presAvg Statistics object
+     * 
+     * @return presAvg
+     */
     public Statistics getPresAvg()
     {
         return presAvg;
     }
 
+    /**
+     * A constuctor for the MapData class. Takes in the file name and splits it into
+     * the date, then pushed the data through the rest of the program
+     * 
+     * @param filename
+     *            The file address for the data
+     */
     public MapData(String filename)
     {
         fileName = filename;
@@ -214,7 +375,7 @@ public class MapData
     }
 
     /**
-     * The constuctor for the MapData class. Takes in information about the file
+     * A constuctor for the MapData class. Takes in information about the file
      * requested, and pushes the data through the rest of the program
      * 
      * @param year
