@@ -1,3 +1,4 @@
+import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
@@ -12,4 +13,15 @@ public class ParameterPanel extends JPanel
     JCheckBox srad = new JCheckBox("SRAD");
     JCheckBox wspd = new JCheckBox("WSPD");
     JCheckBox pres = new JCheckBox("PRES");
+    
+    public ParameterPanel()
+    {
+        add(tair);
+        add(ta9m);
+        add(srad);
+        add(wspd);
+        add(pres);
+        setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Parameter"),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+    }
 }

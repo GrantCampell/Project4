@@ -12,5 +12,5 @@ public class TabelPanel extends JPanel
     Object[][] rowData = {};
 
     private DefaultTableModel tableModel = new DefaultTableModel(rowData, columnNames);
-    private JTable table = new JTable(tableModel);
+    JTable table = new JTable(tableModel);
 }

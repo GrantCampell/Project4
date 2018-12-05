@@ -13,7 +13,7 @@ public class Driver
 
     public static void main(String[] args) throws IOException
     {   
-        new MapFrame("Oklahoma Mesonet");
+        new MesonetFrame("Oklahoma Mesonet");
 
     }
 
