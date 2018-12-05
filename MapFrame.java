@@ -1,8 +1,11 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -16,6 +19,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -24,6 +28,13 @@ public class MapFrame extends JFrame
     private static final long serialVersionUID = 1L;
 
     MapData mapData;
+
+    String statSelect;
+    boolean tairSelect = false;
+    boolean ta9mSelect = false;
+    boolean sradSelect = false;
+    boolean wspdSelect = false;
+    boolean presSelect = false;
 
     JPanel sloganPanel = new JPanel();
     JPanel checkPanel = new JPanel();
@@ -56,7 +67,8 @@ public class MapFrame extends JFrame
     JButton calculate = new JButton("Calculate");
     JButton exit = new JButton("Exit");
 
-    JTable infoBox = new JTable();
+    String[] columnNames = { "Station", "Parameter", "Statistics", "Value", "Reporting Stations", "Date" };
+    Object[][] rowData = {};
 
     public MapFrame(String title)
     {
@@ -103,6 +115,11 @@ public class MapFrame extends JFrame
         buttonsPanel.add(calculate);
         buttonsPanel.add(exit);
 
+        // TODO: THIS IS THE TABLE REFRESHER
+        JTable infoBox = new JTable(rowData, columnNames);
+        JScrollPane tableScrollPane = new JScrollPane(infoBox);
+        infoPanel.add(tableScrollPane);
+
         // Adds the panels to the frame
         setJMenuBar(menu);
         add(sloganPanel);
@@ -133,43 +150,112 @@ public class MapFrame extends JFrame
             }
         });
 
-        tair.addActionListener(new ActionListener()
+        tair.addItemListener(new ItemListener()
         {
-            public void actionPerformed(ActionEvent e)
+            public void itemStateChanged(ItemEvent e)
             {
-                // TODO: Finish this
+                if (e.getStateChange() == ItemEvent.SELECTED)
+                {
+                    tairSelect = true;
+                    System.out.println(tairSelect);
+                }
+                else
+                {
+                    tairSelect = false;
+                    System.out.println(tairSelect);
+                }
             }
         });
 
-        ta9m.addActionListener(new ActionListener()
+        ta9m.addItemListener(new ItemListener()
         {
-            public void actionPerformed(ActionEvent e)
+            public void itemStateChanged(ItemEvent e)
             {
-                // TODO: Finish this
+                if (e.getStateChange() == ItemEvent.SELECTED)
+                {
+                    ta9mSelect = true;
+                    System.out.println(ta9mSelect);
+                }
+                else
+                {
+                    ta9mSelect = false;
+                    System.out.println(ta9mSelect);
+                }
             }
         });
 
-        srad.addActionListener(new ActionListener()
+        srad.addItemListener(new ItemListener()
         {
-            public void actionPerformed(ActionEvent e)
+            public void itemStateChanged(ItemEvent e)
             {
-                // TODO: Finish this
+                if (e.getStateChange() == ItemEvent.SELECTED)
+                {
+                    sradSelect = true;
+                    System.out.println(sradSelect);
+                }
+                else
+                {
+                    sradSelect = false;
+                    System.out.println(sradSelect);
+                }
             }
         });
 
-        wspd.addActionListener(new ActionListener()
+        wspd.addItemListener(new ItemListener()
         {
-            public void actionPerformed(ActionEvent e)
+            public void itemStateChanged(ItemEvent e)
             {
-                // TODO: Finish this
+                if (e.getStateChange() == ItemEvent.SELECTED)
+                {
+                    wspdSelect = true;
+                    System.out.println(wspdSelect);
+                }
+                else
+                {
+                    wspdSelect = false;
+                    System.out.println(wspdSelect);
+                }
             }
         });
 
-        pres.addActionListener(new ActionListener()
+        pres.addItemListener(new ItemListener()
+        {
+            public void itemStateChanged(ItemEvent e)
+            {
+                if (e.getStateChange() == ItemEvent.SELECTED)
+                {
+                    presSelect = true;
+                    System.out.println(presSelect);
+                }
+                else
+                {
+                    presSelect = false;
+                    System.out.println(presSelect);
+                }
+            }
+        });
+
+        max.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                // TODO: Finish this
+                statSelect = "max";
+            }
+        });
+
+        min.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                statSelect = "min";
+            }
+        });
+
+        avg.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                statSelect = "avg";
             }
         });
 
@@ -194,8 +280,14 @@ public class MapFrame extends JFrame
                     // Auto-generated catch block
                     e1.printStackTrace();
                 }
+            }
+        });
 
-                System.out.println(mapData.getTairData().toString());
+        calculate.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                // TODO: This
             }
         });
     }
