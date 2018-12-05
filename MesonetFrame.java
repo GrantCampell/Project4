@@ -29,11 +29,58 @@ public class MesonetFrame extends JFrame
         JMenu file = new JMenu("File");
         JMenuItem load = new JMenuItem("Open Data File");
         JMenuItem exitFile = new JMenuItem("Exit");
+
         public FileMenuBar()
         {
             add(file);
             file.add(load);
             file.add(exitFile);
+            exitFile.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    System.exit(DO_NOTHING_ON_CLOSE);
+                }
+            });
+
+            load.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    JFileChooser chooser = new JFileChooser("data");
+                    FileNameExtensionFilter filter = new FileNameExtensionFilter("MDF Text Files", "mdf");
+                    chooser.setFileFilter(filter);
+                    chooser.showOpenDialog(getParent());
+                    String dataIn = chooser.getSelectedFile().toString();
+                    MapData mapData = new MapData(dataIn);
+
+                    try
+                    {
+                        mapData.parseFile();
+                    }
+                    catch (IOException e1)
+                    {
+                        // Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+
+                    tairMin = mapData.getTairMin();
+                    tairMax = mapData.getTairMax();
+                    tairAvg = mapData.getTairAvg();
+                    ta9mMin = mapData.getTa9mMin();
+                    ta9mMax = mapData.getTa9mMax();
+                    ta9mAvg = mapData.getTa9mAvg();
+                    sradMin = mapData.getSradMin();
+                    sradMax = mapData.getSradMax();
+                    sradAvg = mapData.getSradAvg();
+                    wspdMin = mapData.getWspdMin();
+                    wspdMax = mapData.getWspdMax();
+                    wspdAvg = mapData.getWspdAvg();
+                    presMin = mapData.getPresMin();
+                    presMax = mapData.getPresMax();
+                    presAvg = mapData.getPresAvg();
+                }
+            });
         }
     }
 
@@ -77,7 +124,7 @@ public class MesonetFrame extends JFrame
         super(title);
 
         // Set Alignment of the JTextField and Jlabel
-        slogan.setHorizontalAlignment(JLabel.LEFT);
+        slogan.setHorizontalAlignment(JLabel.CENTER);
 
         slogan.setText("Mesonet - We don't set records, we report them!");
 
@@ -92,8 +139,8 @@ public class MesonetFrame extends JFrame
         add(parmPanel);
         add(statsPanel);
         add(tableScrollPane);
-        add(exit);
         add(calculate);
+        add(exit);
 
         // Configuring of the frame
         setSize(800, 500);
@@ -102,14 +149,6 @@ public class MesonetFrame extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         exit.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                System.exit(DO_NOTHING_ON_CLOSE);
-            }
-        });
-
-        menuBar.exitFile.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
@@ -189,45 +228,6 @@ public class MesonetFrame extends JFrame
                 {
                     presSelect = false;
                 }
-            }
-        });
-
-        menuBar.load.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                JFileChooser chooser = new JFileChooser("data");
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("MDF Text Files", "mdf");
-                chooser.setFileFilter(filter);
-                chooser.showOpenDialog(getParent());
-                String dataIn = chooser.getSelectedFile().toString();
-                MapData mapData = new MapData(dataIn);
-
-                try
-                {
-                    mapData.parseFile();
-                }
-                catch (IOException e1)
-                {
-                    // Auto-generated catch block
-                    e1.printStackTrace();
-                }
-
-                tairMin = mapData.getTairMin();
-                tairMax = mapData.getTairMax();
-                tairAvg = mapData.getTairAvg();
-                ta9mMin = mapData.getTa9mMin();
-                ta9mMax = mapData.getTa9mMax();
-                ta9mAvg = mapData.getTa9mAvg();
-                sradMin = mapData.getSradMin();
-                sradMax = mapData.getSradMax();
-                sradAvg = mapData.getSradAvg();
-                wspdMin = mapData.getWspdMin();
-                wspdMax = mapData.getWspdMax();
-                wspdAvg = mapData.getWspdAvg();
-                presMin = mapData.getPresMin();
-                presMax = mapData.getPresMax();
-                presAvg = mapData.getPresAvg();
             }
         });
 
