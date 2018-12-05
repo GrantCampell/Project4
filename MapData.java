@@ -107,6 +107,31 @@ public class MapData
     ArrayList<Observation> wspdData = new ArrayList<Observation>();
     ArrayList<Observation> presData = new ArrayList<Observation>();
 
+    public ArrayList<Observation> getSradData()
+    {
+        return sradData;
+    }
+
+    public ArrayList<Observation> getTairData()
+    {
+        return tairData;
+    }
+
+    public ArrayList<Observation> getTa9mData()
+    {
+        return ta9mData;
+    }
+
+    public ArrayList<Observation> getWspdData()
+    {
+        return wspdData;
+    }
+
+    public ArrayList<Observation> getPresData()
+    {
+        return presData;
+    }
+
     public MapData(String filename)
     {
         fileName = filename;
