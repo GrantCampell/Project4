@@ -1,11 +1,13 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -13,10 +15,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MapFrame extends JFrame
 {
@@ -28,7 +28,7 @@ public class MapFrame extends JFrame
     JPanel infoPanel = new JPanel();
     JPanel buttonsPanel = new JPanel();
 
-    // TODO: This is where i'll deal with the menu bar
+    // The menu bar
     JMenuBar menu = new JMenuBar();
     JMenu file = new JMenu("File");
     JMenuItem load = new JMenuItem("Open Data File");
@@ -53,7 +53,7 @@ public class MapFrame extends JFrame
     JButton calculate = new JButton("Calculate");
     JButton exit = new JButton("Exit");
 
-    JTextPane infoBox = new JTextPane();
+    JTable infoBox = new JTable();
 
     public MapFrame(String title)
     {
@@ -100,8 +100,6 @@ public class MapFrame extends JFrame
         buttonsPanel.add(calculate);
         buttonsPanel.add(exit);
 
-        infoPanel.add(infoBox);
-
         // Adds the panels to the frame
         setJMenuBar(menu);
         add(sloganPanel);
@@ -123,12 +121,33 @@ public class MapFrame extends JFrame
                 System.exit(DO_NOTHING_ON_CLOSE);
             }
         });
-        
+
         exitFile.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
                 System.exit(DO_NOTHING_ON_CLOSE);
+            }
+        });
+
+        tair.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                // TODO: Finish this
+            }
+        });
+
+        load.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("MDF Text Files", "mdf");
+                chooser.setFileFilter(filter);
+                chooser.setCurrentDirectory(new File("C:/Users/Grant Campbell/Documents/Programming/Project4/data"));
+                chooser.showOpenDialog(getParent());
+                String dataIn = chooser.getSelectedFile().toString();
             }
         });
     }
