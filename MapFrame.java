@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -128,6 +129,7 @@ public class MapFrame extends JFrame
         statsPanel.add(max);
         statsPanel.add(min);
         statsPanel.add(avg);
+        max.setSelected(true);
         statsPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Statisitcs"),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
@@ -146,7 +148,7 @@ public class MapFrame extends JFrame
         add(buttonsPanel);
 
         // Configuring of the frame
-        setSize(500, 500);
+        setSize(800, 500);
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -242,30 +244,6 @@ public class MapFrame extends JFrame
             }
         });
 
-        max.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                statSelect = "max";
-            }
-        });
-
-        min.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                statSelect = "min";
-            }
-        });
-
-        avg.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                statSelect = "avg";
-            }
-        });
-
         load.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -309,7 +287,7 @@ public class MapFrame extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                if (statSelect.equalsIgnoreCase("max"))
+                if (max.isSelected())
                 {
                     if (tairSelect)
                     {
@@ -317,7 +295,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "TAIR", "MAXIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                tairMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (ta9mSelect)
@@ -326,7 +304,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "TA9M", "MAXIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                ta9mMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (sradSelect)
@@ -335,7 +313,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "SRAD", "MAXIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                sradMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (wspdSelect)
@@ -344,7 +322,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "WSPD", "MAXIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                wspdMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (presSelect)
@@ -353,10 +331,10 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "PRES", "MAXIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                presMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
                 }
-                else if (statSelect.equalsIgnoreCase("min"))
+                else if (min.isSelected())
                 {
                     if (tairSelect)
                     {
@@ -364,7 +342,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "TAIR", "MINIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                tairMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (ta9mSelect)
@@ -373,7 +351,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "TA9M", "MINIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                ta9mMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (sradSelect)
@@ -382,7 +360,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "SRAD", "MINIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                sradMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (wspdSelect)
@@ -391,7 +369,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "WSPD", "MINIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                wspdMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (presSelect)
@@ -400,10 +378,10 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "PRES", "MINIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                presMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
                 }
-                else
+                else if (avg.isSelected())
                 {
                     if (tairSelect)
                     {
@@ -411,7 +389,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "TAIR", "AVERAGE", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                tairAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (ta9mSelect)
@@ -420,7 +398,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "TA9M", "AVGERAGE", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                ta9mAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (sradSelect)
@@ -429,7 +407,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "SRAD", "AVERAGE", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                sradAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (wspdSelect)
@@ -438,7 +416,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "WSPD", "AVERAGE", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                wspdAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
                     if (presSelect)
@@ -447,7 +425,7 @@ public class MapFrame extends JFrame
 
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         model.addRow(new Object[] { tempStat.getStid(), "PRES", "AVERAGE", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
+                                presAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
                 }
             }
