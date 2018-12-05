@@ -68,12 +68,12 @@ public class MapData
      * A final String containing the stat name "SRAD"
      */
     private static final String SRAD = "SRAD";
-    
+
     /**
      * A final String containing the stat name "WSPD"
      */
     private static final String WSPD = "WSPD";
-    
+
     /**
      * A final String containing the stat name "PRES"
      */
@@ -100,12 +100,18 @@ public class MapData
      * collection
      */
     private GregorianCalendar utcDateTime;
-    
+
     ArrayList<Observation> sradData = new ArrayList<Observation>();
     ArrayList<Observation> tairData = new ArrayList<Observation>();
     ArrayList<Observation> ta9mData = new ArrayList<Observation>();
     ArrayList<Observation> wspdData = new ArrayList<Observation>();
     ArrayList<Observation> presData = new ArrayList<Observation>();
+
+    public MapData(String filename)
+    {
+        fileName = filename;
+        prepareDataCatalog();
+    }
 
     /**
      * The constuctor for the MapData class. Takes in information about the file
@@ -285,7 +291,7 @@ public class MapData
         // Runs through the input file and reads each line into a player object
         // Counter will indicate the size the new array needs to be
         // Creates temp arrays to be stored in dataCatalog
-        
+
         numberOfStations = 0;
         while ((temp = br.readLine()) != null)
         {
