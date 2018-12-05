@@ -22,6 +22,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 public class MapFrame extends JFrame
 {
@@ -35,7 +36,7 @@ public class MapFrame extends JFrame
     boolean sradSelect = false;
     boolean wspdSelect = false;
     boolean presSelect = false;
-    
+
     Statistics tairMin;
     Statistics tairMax;
     Statistics tairAvg;
@@ -86,6 +87,9 @@ public class MapFrame extends JFrame
     String[] columnNames = { "Station", "Parameter", "Statistics", "Value", "Reporting Stations", "Date" };
     Object[][] rowData = {};
 
+    private DefaultTableModel tableModel = new DefaultTableModel(rowData, columnNames);
+    private JTable table = new JTable(tableModel);
+
     public MapFrame(String title)
     {
         super(title);
@@ -96,7 +100,7 @@ public class MapFrame extends JFrame
         slogan.setText("Mesonet - We don't set records, we report them!");
 
         // sets the layout grid for the GUI
-        setLayout(new GridLayout(5, 0));
+        setLayout(new GridLayout(6, 0));
 
         // Buttons added to the stats button group
         stats.add(max);
@@ -131,17 +135,14 @@ public class MapFrame extends JFrame
         buttonsPanel.add(calculate);
         buttonsPanel.add(exit);
 
-        // TODO: THIS IS THE TABLE REFRESHER
-        JTable infoBox = new JTable(rowData, columnNames);
-        JScrollPane tableScrollPane = new JScrollPane(infoBox);
-        infoPanel.add(tableScrollPane);
+        JScrollPane tableScrollPane = new JScrollPane(table);
 
         // Adds the panels to the frame
         setJMenuBar(menu);
         add(sloganPanel);
         add(checkPanel);
         add(statsPanel);
-        add(infoPanel);
+        add(tableScrollPane);
         add(buttonsPanel);
 
         // Configuring of the frame
@@ -285,7 +286,7 @@ public class MapFrame extends JFrame
                     // Auto-generated catch block
                     e1.printStackTrace();
                 }
-                
+
                 tairMin = mapData.getTairMin();
                 tairMax = mapData.getTairMax();
                 tairAvg = mapData.getTairAvg();
@@ -305,7 +306,7 @@ public class MapFrame extends JFrame
         });
 
         calculate.addActionListener(new ActionListener()
-        {   
+        {
             public void actionPerformed(ActionEvent e)
             {
                 if (statSelect.equalsIgnoreCase("max"))
@@ -313,117 +314,140 @@ public class MapFrame extends JFrame
                     if (tairSelect)
                     {
                         Statistics tempStat = tairMax;
-                        Object[] tempTair = { tempStat.getStid(), "TAIR", "MAXIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
 
-                        Object[][] tempArray = new Object[rowData.length + 1][];
-                        for (int i = 0; i < rowData.length; ++i)
-                        {
-                            tempArray[i] = rowData[i];
-                        }
-                        tempArray[tempArray.length - 1] = tempTair;
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "TAIR", "MAXIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (ta9mSelect)
                     {
-                        Statistics tempStat = mapData.getTa9mMax();
-                        Object[] tempTa9m = { tempStat.getStid(), "TA9M", "MAXIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = ta9mMax;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "TA9M", "MAXIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (sradSelect)
                     {
-                        Statistics tempStat = mapData.getSradMax();
-                        Object[] tempSrad = { tempStat.getStid(), "SRAD", "MAXIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = sradMax;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "SRAD", "MAXIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (wspdSelect)
                     {
-                        Statistics tempStat = mapData.getWspdMax();
-                        Object[] tempWspd = { tempStat.getStid(), "WSPD", "MAXIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = wspdMax;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "WSPD", "MAXIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (presSelect)
                     {
-                        Statistics tempStat = mapData.getPresMax();
-                        Object[] tempPres = { tempStat.getStid(), "PRES", "MAXIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = presMax;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "PRES", "MAXIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
                 }
                 else if (statSelect.equalsIgnoreCase("min"))
                 {
                     if (tairSelect)
                     {
-                        Statistics tempStat = mapData.getTairMin();
-                        Object[] tempTair = { tempStat.getStid(), "TAIR", "MINIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = tairMin;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "TAIR", "MINIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (ta9mSelect)
                     {
-                        Statistics tempStat = mapData.getTa9mMin();
-                        Object[] tempTa9m = { tempStat.getStid(), "TA9M", "MINIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = ta9mMin;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "TA9M", "MINIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (sradSelect)
                     {
-                        Statistics tempStat = mapData.getSradMin();
-                        Object[] tempSrad = { tempStat.getStid(), "SRAD", "MINIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = sradMin;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "SRAD", "MINIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (wspdSelect)
                     {
-                        Statistics tempStat = mapData.getWspdMin();
-                        Object[] tempWspd = { tempStat.getStid(), "WSPD", "MINIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = wspdMin;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "WSPD", "MINIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (presSelect)
                     {
-                        Statistics tempStat = mapData.getPresMin();
-                        Object[] tempPres = { tempStat.getStid(), "PRES", "MINIMUM", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = presMin;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "PRES", "MINIMUM", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
                 }
                 else
                 {
                     if (tairSelect)
                     {
-                        Statistics tempStat = mapData.getTairAvg();
-                        Object[] tempTair = { tempStat.getStid(), "TAIR", "AVERAGE", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = tairAvg;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "TAIR", "AVERAGE", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (ta9mSelect)
                     {
-                        Statistics tempStat = mapData.getTa9mAvg();
-                        Object[] tempTa9m = { tempStat.getStid(), "TA9M", "AVERAGE", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = ta9mAvg;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "TA9M", "AVGERAGE", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (sradSelect)
                     {
-                        Statistics tempStat = mapData.getSradAvg();
-                        Object[] tempSrad = { tempStat.getStid(), "SRAD", "AVERAGE", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = sradAvg;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "SRAD", "AVERAGE", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (wspdSelect)
                     {
-                        Statistics tempStat = mapData.getWspdAvg();
-                        Object[] tempWspd = { tempStat.getStid(), "WSPD", "AVERAGE", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = wspdAvg;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "WSPD", "AVERAGE", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
 
                     if (presSelect)
                     {
-                        Statistics tempStat = mapData.getPresAvg();
-                        Object[] tempPres = { tempStat.getStid(), "PRES", "AVERAGE", tempStat.getValue(),
-                                "REPORING STATIONS", tempStat.getUTCDateTimeString() };
+                        Statistics tempStat = presAvg;
+
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        model.addRow(new Object[] { tempStat.getStid(), "PRES", "AVERAGE", tempStat.getValue(),
+                                "REPORING STATIONS", tempStat.getUTCDateTimeString() });
                     }
                 }
             }
