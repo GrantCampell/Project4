@@ -14,6 +14,13 @@ import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * A JFrame that contains a interface that can display the different statistics
+ * of weather data.
+ * 
+ * @author Grant Campbell
+ *
+ */
 public class MesonetFrame extends JFrame
 {
     /**
@@ -21,6 +28,13 @@ public class MesonetFrame extends JFrame
      */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * A JMenuBar that contains a file button. This button will allow the user to
+     * load in data, or exit the program.
+     * 
+     * @author Grant Campbell
+     *
+     */
     public class FileMenuBar extends JMenuBar
     {
         /**
@@ -28,10 +42,26 @@ public class MesonetFrame extends JFrame
          */
         private static final long serialVersionUID = 1L;
 
+        /**
+         * A file tab for a menu bar
+         */
         JMenu file = new JMenu("File");
+
+        /**
+         * A load button that opens a file of data
+         */
         JMenuItem load = new JMenuItem("Open Data File");
+
+        /**
+         * An exit button that closes out of the program
+         */
         JMenuItem exitFile = new JMenuItem("Exit");
 
+        /**
+         * The constructor for the FileMenuBar. Adds the file tab which contains the
+         * load and exit buttons. It also adds the action listeners for botht he load
+         * and exit buttons.
+         */
         public FileMenuBar()
         {
             add(file);
@@ -86,36 +116,135 @@ public class MesonetFrame extends JFrame
         }
     }
 
+    /**
+     * A FileMenuBar that appears in the frame.
+     */
     FileMenuBar menuBar = new FileMenuBar();
+
+    /**
+     * A StatisticsPanel that appears in the frame.
+     */
     StatisticsPanel statsPanel = new StatisticsPanel();
+
+    /**
+     * A ParameterPanel that appears in the frame.
+     */
     ParameterPanel paramPanel = new ParameterPanel();
+
+    /**
+     * A TablePanel that appears in the frame.
+     */
     TabelPanel tabelPanel = new TabelPanel();
 
+    /**
+     * The MapData to be used by user interface.
+     */
     MapData mapData;
 
+    /**
+     * Statistics object containing the minimum tair value and related information.
+     */
     Statistics tairMin;
+
+    /**
+     * Statistics object containing the maximum tair value and related information.
+     */
     Statistics tairMax;
+
+    /**
+     * Statistics object containing the average tair value and related information.
+     */
     Statistics tairAvg;
+
+    /**
+     * Statistics object containing the minimum ta9m value and related information.
+     */
     Statistics ta9mMin;
+
+    /**
+     * Statistics object containing the maximum ta9m value and related information.
+     */
     Statistics ta9mMax;
+
+    /**
+     * Statistics object containing the average ta9m value and related information.
+     */
     Statistics ta9mAvg;
+
+    /**
+     * Statistics object containing the minimum srad value and related information.
+     */
     Statistics sradMin;
+
+    /**
+     * Statistics object containing the maximum srad value and related information.
+     */
     Statistics sradMax;
+
+    /**
+     * Statistics object containing the average srad value and related information.
+     */
     Statistics sradAvg;
+
+    /**
+     * Statistics object containing the minimum wspd value and related information.
+     */
     Statistics wspdMin;
+
+    /**
+     * Statistics object containing the maximum wspd value and related information.
+     */
     Statistics wspdMax;
+
+    /**
+     * Statistics object containing the average wspd value and related information.
+     */
     Statistics wspdAvg;
+
+    /**
+     * Statistics object containing the minimum pres value and related information.
+     */
     Statistics presMin;
+
+    /**
+     * Statistics object containing the maximum pres value and related information.
+     */
     Statistics presMax;
+
+    /**
+     * Statistics object containing the average pres value and related information.
+     */
     Statistics presAvg;
 
     // The slogan text box
+    /**
+     * A JLabel containing the slogan for the frame.
+     */
     JLabel slogan = new JLabel();
-    JButton calculate = new JButton("Calculate");
-    JButton exit = new JButton("Exit");
-    JPanel buttonsPanel = new JPanel();
-    
 
+    /**
+     * A JButton that says "Calculate". Will be used to calculate data statistics.
+     */
+    JButton calculate = new JButton("Calculate");
+
+    /**
+     * A JButton that says "Exit". Will be used to exit the program.
+     */
+    JButton exit = new JButton("Exit");
+
+    /**
+     * A JPanel containing the Calculate and Exit buttons.
+     */
+    JPanel buttonsPanel = new JPanel();
+
+    /**
+     * The constructor for the MesonetFrame class. It takes in the name of the
+     * frame, and then adds the panels to the frame. It also contains the action
+     * listeners for the calculate and exit buttons.
+     * 
+     * @param title
+     *            The name of the window the frame appears in.
+     */
     public MesonetFrame(String title)
     {
         super(title);
@@ -129,7 +258,7 @@ public class MesonetFrame extends JFrame
         setLayout(new GridLayout(6, 0));
 
         JScrollPane tableScrollPane = new JScrollPane(tabelPanel.table);
-        
+
         buttonsPanel.add(calculate);
         buttonsPanel.add(exit);
 
