@@ -86,7 +86,7 @@ public class MesonetFrame extends JFrame
 
     FileMenuBar menuBar = new FileMenuBar();
     StatisticsPanel statsPanel = new StatisticsPanel();
-    ParameterPanel parmPanel = new ParameterPanel();
+    ParameterPanel paramPanel = new ParameterPanel();
     TabelPanel tabelPanel = new TabelPanel();
 
     MapData mapData;
@@ -129,7 +129,7 @@ public class MesonetFrame extends JFrame
         // Adds the panels to the frame
         setJMenuBar(menuBar);
         add(slogan);
-        add(parmPanel);
+        add(paramPanel);
         add(statsPanel);
         add(tableScrollPane);
         add(calculate);
@@ -155,7 +155,7 @@ public class MesonetFrame extends JFrame
             {
                 if (statsPanel.max.isSelected())
                 {
-                    if (parmPanel.getTairSelect())
+                    if (paramPanel.getTairSelect())
                     {
                         Statistics tempStat = tairMax;
 
@@ -164,7 +164,7 @@ public class MesonetFrame extends JFrame
                                 tairMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getTa9mSelect())
+                    if (paramPanel.getTa9mSelect())
                     {
                         Statistics tempStat = ta9mMax;
 
@@ -173,7 +173,7 @@ public class MesonetFrame extends JFrame
                                 ta9mMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getSradSelect())
+                    if (paramPanel.getSradSelect())
                     {
                         Statistics tempStat = sradMax;
 
@@ -182,7 +182,7 @@ public class MesonetFrame extends JFrame
                                 sradMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getWspdSelect())
+                    if (paramPanel.getWspdSelect())
                     {
                         Statistics tempStat = wspdMax;
 
@@ -191,7 +191,7 @@ public class MesonetFrame extends JFrame
                                 wspdMax.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getPresSelect())
+                    if (paramPanel.getPresSelect())
                     {
                         Statistics tempStat = presMax;
 
@@ -202,7 +202,7 @@ public class MesonetFrame extends JFrame
                 }
                 else if (statsPanel.min.isSelected())
                 {
-                    if (parmPanel.getTairSelect())
+                    if (paramPanel.getTairSelect())
                     {
                         Statistics tempStat = tairMin;
 
@@ -211,7 +211,7 @@ public class MesonetFrame extends JFrame
                                 tairMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getTa9mSelect())
+                    if (paramPanel.getTa9mSelect())
                     {
                         Statistics tempStat = ta9mMin;
 
@@ -220,7 +220,7 @@ public class MesonetFrame extends JFrame
                                 ta9mMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getSradSelect())
+                    if (paramPanel.getSradSelect())
                     {
                         Statistics tempStat = sradMin;
 
@@ -229,7 +229,7 @@ public class MesonetFrame extends JFrame
                                 sradMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getWspdSelect())
+                    if (paramPanel.getWspdSelect())
                     {
                         Statistics tempStat = wspdMin;
 
@@ -238,7 +238,7 @@ public class MesonetFrame extends JFrame
                                 wspdMin.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getPresSelect())
+                    if (paramPanel.getPresSelect())
                     {
                         Statistics tempStat = presMin;
 
@@ -249,7 +249,7 @@ public class MesonetFrame extends JFrame
                 }
                 else if (statsPanel.avg.isSelected())
                 {
-                    if (parmPanel.getTairSelect())
+                    if (paramPanel.getTairSelect())
                     {
                         Statistics tempStat = tairAvg;
 
@@ -258,7 +258,7 @@ public class MesonetFrame extends JFrame
                                 tairAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getTa9mSelect())
+                    if (paramPanel.getTa9mSelect())
                     {
                         Statistics tempStat = ta9mAvg;
 
@@ -267,7 +267,7 @@ public class MesonetFrame extends JFrame
                                 ta9mAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getSradSelect())
+                    if (paramPanel.getSradSelect())
                     {
                         Statistics tempStat = sradAvg;
 
@@ -276,7 +276,7 @@ public class MesonetFrame extends JFrame
                                 sradAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getWspdSelect())
+                    if (paramPanel.getWspdSelect())
                     {
                         Statistics tempStat = wspdAvg;
 
@@ -285,7 +285,7 @@ public class MesonetFrame extends JFrame
                                 wspdAvg.getNumberOfReportingStations(), tempStat.getUTCDateTimeString() });
                     }
 
-                    if (parmPanel.getPresSelect())
+                    if (paramPanel.getPresSelect())
                     {
                         Statistics tempStat = presAvg;
 
