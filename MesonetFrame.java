@@ -1,11 +1,7 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.IOException;
-
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -13,12 +9,18 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class MesonetFrame extends JFrame
 {
+    /**
+     * Default ID
+     */
+    private static final long serialVersionUID = 1L;
+
     public class FileMenuBar extends JMenuBar
     {
         /**
@@ -111,6 +113,8 @@ public class MesonetFrame extends JFrame
     JLabel slogan = new JLabel();
     JButton calculate = new JButton("Calculate");
     JButton exit = new JButton("Exit");
+    JPanel buttonsPanel = new JPanel();
+    
 
     public MesonetFrame(String title)
     {
@@ -125,6 +129,9 @@ public class MesonetFrame extends JFrame
         setLayout(new GridLayout(6, 0));
 
         JScrollPane tableScrollPane = new JScrollPane(tabelPanel.table);
+        
+        buttonsPanel.add(calculate);
+        buttonsPanel.add(exit);
 
         // Adds the panels to the frame
         setJMenuBar(menuBar);
@@ -132,8 +139,7 @@ public class MesonetFrame extends JFrame
         add(paramPanel);
         add(statsPanel);
         add(tableScrollPane);
-        add(calculate);
-        add(exit);
+        add(buttonsPanel);
 
         // Configuring of the frame
         setSize(800, 500);
